@@ -11,3 +11,9 @@ if __name__ == "__main__":
     #['sdaf', 'ffff']
     print r.mget({"name1":"sdaf", "name2":"ffff"})
     #['ffff', 'sdaf']
+
+    print r.info()["role"]
+
+    print r.ping()
+
+    print r.info().keys()

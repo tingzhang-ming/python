@@ -1,0 +1,379 @@
+' to retry, use: --limit @/opt/dbcm-operator-module/endpoint/mysql.retry
+{
+    "plays": [
+        {
+            "play": {
+                "id": "50b7c3a6-797a-8b0e-4ea0-000000000003",
+                "name": "docker"
+            },
+            "tasks": [
+                {
+                    "hosts": {
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000000e",
+                        "name": "add container to inventory"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000013",
+                        "name": "create a database"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000015",
+                        "name": "remove database"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000001a",
+                        "name": "create a user and empower"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000001c",
+                        "name": "remove a user"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000021",
+                        "name": "create a database"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000023",
+                        "name": "create a user for the database"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000025",
+                        "name": "remove database"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000027",
+                        "name": "remove user of the database"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000002c",
+                        "name": "get mysql variables in memory"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000002e",
+                        "name": "set mysql variables in memory"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000033",
+                        "name": "get mysql variables in my.cnf"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000035",
+                        "name": "get mysql variables in my.cnf"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000037",
+                        "name": "get mysql variables in my.cnf"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-000000000039",
+                        "name": "set mysql variables in my.cnf"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000003b",
+                        "name": "remove mysql variables in my.cnf"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        },
+                        "996f3878f1e4": {
+                            "_ansible_no_log": false,
+                            "changed": false,
+                            "skip_reason": "Conditional result was False",
+                            "skipped": true
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000003d",
+                        "name": "remove mysql variables in my.cnf"
+                    }
+                },
+                {
+                    "hosts": {
+                        "51e956cef5a4": {
+                            "failed": true,
+                            "msg": "Docker version check (['/usr/bin/docker', 'version', '--format', \"'{{.Server.Version}}'\"]) failed: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.30/version: dial unix /var/run/docker.sock: connect: permission denied\n"
+                        },
+                        "996f3878f1e4": {
+                            "failed": true,
+                            "msg": "Docker version check (['/usr/bin/docker', 'version', '--format', \"'{{.Server.Version}}'\"]) failed: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.30/version: dial unix /var/run/docker.sock: connect: permission denied\n"
+                        }
+                    },
+                    "task": {
+                        "id": "50b7c3a6-797a-8b0e-4ea0-00000000003f",
+                        "name": "set mysql variables in my.cnf"
+                    }
+                }
+            ]
+        }
+    ],
+    "stats": {
+        "51e956cef5a4": {
+            "changed": 0,
+            "failures": 1,
+            "ok": 0,
+            "skipped": 16,
+            "unreachable": 0
+        },
+        "996f3878f1e4": {
+            "changed": 0,
+            "failures": 1,
+            "ok": 0,
+            "skipped": 17,
+            "unreachable": 0
+        }
+    }
+}'
