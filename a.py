@@ -1,2 +1,1 @@
-
-float("dd")
+import prometheus_client
