@@ -38,7 +38,7 @@ Failure
 Traceback (most recent call last):
   File "/usr/lib64/python2.7/unittest/case.py", line 369, in run
     testMethod()
-  File "/root/github/python/unittest/a.py", line 24, in test_error
+  File "/root/github/python/unittest/threaded_crawler.py", line 24, in test_error
     self.assertTrue(element not in self.seq)
   File "/usr/lib64/python2.7/unittest/case.py", line 462, in assertTrue
     raise self.failureException(msg)
