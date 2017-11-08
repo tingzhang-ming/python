@@ -1,12 +1,31 @@
+import string
 
 def t1():
-    l = [1,3,5,7,9,11,13,15]
-    for i in l:
-        for j in l:
-            for k in l:
-                if i+j+k == 30:
-                    return [i,j,k]
-    return []
+    # a = {"a","b", [1,2,3]}
+    b = ("a","b",[1,2,3])
+    print b
+
+def t2():
+    a = ["aaa","ssd"]
+    b = string.join(a, ",")
+    print b
+
+def t3():
+    a = [1,2,3,4]
+    print a[1:]
+
+def t4():
+    a = 4096
+    l = ["q","w","e"]
+    b = a/len(l)
+    res = {ll:b for ll in l}
+    c = a - b*len(l)
+    res[l[0]] += c
+    print res
+    sum = 0
+    for k, v in res.items():
+        sum += v
+    print sum
 
 if __name__ == '__main__':
-    print t1()
+    t4()
