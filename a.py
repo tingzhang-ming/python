@@ -27,5 +27,14 @@ def t4():
         sum += v
     print sum
 
+def t5():
+    d = dict(
+        n1="haha",
+        n2="lala"
+    )
+    a = "asddasd--%(n1)s,asddff--%(n2)ssdfjdfhj--%(n1)s" %d
+    print a
+
+
 if __name__ == '__main__':
-    t4()
+    t5()
