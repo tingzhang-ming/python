@@ -1,10 +1,12 @@
 from abc import ABCMeta, abstractmethod
 
+
 class Abstract_test(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, name):
         self.name = name
+        self.name2 = "fdsfsdf"
 
     @abstractmethod
     def get(self):

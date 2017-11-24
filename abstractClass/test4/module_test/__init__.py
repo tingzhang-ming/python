@@ -5,6 +5,7 @@ class Abstract_test1(object):
 
     def __init__(self, name):
         self.name1 = name
+        self.name2 = "hahah"
 
     @abstractmethod
     def get1(self):

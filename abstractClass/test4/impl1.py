@@ -1,6 +1,7 @@
 from module_test import Abstract_test1
 from module_test2 import Abstract_test2
 
+
 class Test(Abstract_test1, Abstract_test2):
 
     def __init__(self, name):

@@ -35,6 +35,11 @@ def t5():
     a = "asddasd--%(n1)s,asddff--%(n2)ssdfjdfhj--%(n1)s" %d
     print a
 
+import os
+def t6():
+    a = [1,2,3,4,5]
+    for k, v in enumerate(a):
+        print k, v
 
 if __name__ == '__main__':
-    t5()
+    t6()
