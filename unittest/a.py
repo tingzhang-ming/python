@@ -1,6 +1,7 @@
 import unittest
 import random
 
+
 class Test(unittest.TestCase):
 
     def setUp(self):

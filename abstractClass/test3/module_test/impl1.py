@@ -1,5 +1,6 @@
 from module_test import Abstract_test
 
+
 class Test(Abstract_test):
 
     def __init__(self, name):
@@ -11,3 +12,7 @@ class Test(Abstract_test):
     def set(self, name):
         super(Test, self).set(name)
         self.name = name
+
+    def p(self):
+        print self.name
+        print self.name2
