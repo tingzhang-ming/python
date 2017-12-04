@@ -41,5 +41,39 @@ def t6():
     for k, v in enumerate(a):
         print k, v
 
+
+def _parse_uri(uri):
+    """ parse download uri """
+    if "ftp://" in uri:
+        url = string.lstrip(uri, "ftp://")
+    elif "http://" in uri:
+        url = string.lstrip(uri, "http://")
+    elif "manta://" in uri:
+        url = string.lstrip(uri, "manta://")
+    else:
+        raise Exception("Expecting 'ftp://' or 'http://' at the beginning of the URL")
+    try:
+        file_name = uri.split("/")[-1]
+    except ValueError:
+        raise Exception("can not get file name from %s" % uri)
+    return file_name
+
+
+def t7():
+    u = "manta://test1-mysql-dump-2017-11-28T03-08-49Z.gz"
+    print _parse_uri(u)
+
+
+def _explodeLocation(location):
+    storage_url = "/".join(location.split('/')[:-2])
+    container = location.split('/')[-2]
+    filename = location.split('/')[-1]
+    return storage_url, container, filename
+
+
+def t8():
+    location = "/backup/location/123"
+    print _explodeLocation(location)
+
 if __name__ == '__main__':
-    t6()
+    t8()
