@@ -12,3 +12,4 @@ class Registry(object):
         for func in self._functions:
             return_values.append(func(*args, **kwargs))
         return return_values
+

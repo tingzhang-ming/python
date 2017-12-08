@@ -40,7 +40,7 @@ def list():
     print "list---------------------------------------------"
     client = get_manta_client()
     bucket = '/{}/stor/{}'.format(client.account, "test1")
-    ls = client.list_directory(join(bucket, 'backups', 'test3-mysql-backup-2017-12-03T07-03-09Z'))
+    ls = client.list_directory(join(bucket, 'backups', 'test3-mysql-dump-2017-12-04T12-07-32Z.gz'))
     for l in ls:
         print l
 

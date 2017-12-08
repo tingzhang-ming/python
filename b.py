@@ -33,5 +33,18 @@ def t6():
     a = ['mhc', 'mhc2']
     print " ".join(a)
 
+
+def t7():
+    a = 'mysql.ms.haha'
+    a_split = a.split('.')
+    a_len = len(a_split)
+    for i in range(a_len):
+        yield '.'.join(a_split[:i+1])
+
+
+def t8():
+    for i in t7():
+        print i
+
 if __name__ == '__main__':
-    t6()
+    t8()

@@ -1,13 +1,16 @@
 
 registry = []
 
+
 def register(decorated):
     registry.append(decorated)
     return decorated
 
+
 @register
 def foo():
     return 3
+
 
 @register
 def bar():
