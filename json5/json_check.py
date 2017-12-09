@@ -13,5 +13,5 @@ if __name__ == '__main__':
                 print("This is not json file.")
                 sys.exit(1)
         with open(sys.argv[1], 'w') as f:
-            json.dump(data_parse, f, indent=2)
+            json.dump(data_parse, f, indent=2, sort_keys=True)
             print "success"
