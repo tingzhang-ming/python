@@ -1,0 +1,14 @@
+Metadata-Version: 1.1
+Name: god
+Version: 0.0.1
+Summary: Mhc test framework
+Home-page: UNKNOWN
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: Apache License, Version 2.0
+Description: UNKNOWN
+Keywords: mesos
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nodes</title>
+  <meta http-equiv="refresh" content="300">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    tr.node {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container" style="width: 90%">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Hyaline</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Clusters</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/nodes">Nodes</a></li>
+      </ul>
+            <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/info" target="_blank">LOG</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/info/download">download</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/error" target="_blank">ERROR</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/error/download">download</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <button  type="button" class="btn btn-default navbar-btn">
+      <a href="/createservice">创建服务</a>
+      </button>
+      </ul>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</div>
+
+<div class="container-fluid">
+  %if cluster_name:
+  <h1>${cluster_name}</h1>
+  %else:
+  <h1>nodes</h1>
+  %endif
+  <!-- TODO: ajax -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>identity</th>
+        <th>ip</th>
+        <th>create_time</th>
+        <th>latest_action</th>
+        <th>action_time</th>
+        <th>sandboxdir</th>
+        <th>cpus</th>
+        <th>mem(MB)</th>
+        <th>disk(GB)</th>
+        <th>port</th>
+        <th>state</th>
+    </tr>
+    </thead>
+    <tbody>
+    %if cluster_name:
+    %for node in nodes:
+    %if node.cluster_name==cluster_name:
+    <tr class="node" data-toggle="tooltip" data-placement="left" title='${node.latest_error}'>
+        <td>${node.task_id}</td>
+        <td>${node.identity}</td>
+        <td>${node.ip}</td>
+        <td>${node.create_time}</td>
+        <td>${node.latest_action}</td>
+        <td>${node.action_time}</td>
+        <td>${node.sandboxdir}</td>
+        <td>${node.cpus}</td>
+        <td>${node.mem}</td>
+        <td>${node.disk}</td>
+        <td>${node.port}</td>
+        <td>${node.state}</td>
+        <td>
+            <div class="btn-group">
+        %if node.state=="RUNNING":
+        <button type="button" class="btn btn-primary" style="width:150px;" id="stop" onclick="stopnode($(this))">停止节点</button>
+        %endif
+        %if node.state in ["STOPPED","STARTING_FAILED","EXPANDING_FAILED","CONTRACTING_FAILED"]:
+        <button type="button" class="btn btn-primary" style="width:150px;" id="start" onclick="startnode($(this))">启动节点</button>
+        %endif
+        %if node.state in ["STOPPED","STAGING_FAILED","STARTING_FAILED","SERVICE_RESTORING_FAILED","PHYSICS_RESTORING_FAILE","CHANGE_HOST_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="delete" onclick="deletenode($(this))">删除节点</button>
+        %endif
+        %if node.state in ["DELETED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="recover" onclick="recovernode($(this))">恢复节点</button>
+        %endif
+        %if node.state in ["DELETED"]:
+        <button type="button" class="btn btn-danger" style="width:150px;" id="recycle" onclick="shiftdeletenode($(this))">资源回收</button>
+        %endif
+        %if node.state in ["SERVICE_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="servicerestore" onclick="servicerestore($(this))">服务修复</button>
+        %endif
+        %if node.state in ["SERVICE_RESTORING_FAILED","PHYSICS_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="physicsrestore" onclick="physicsrestore($(this))">物理修复</button>
+        %endif
+        %if node.state in ["PHYSICS_RESTORING_FAILED","CHANGE_HOST_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="changehost" onclick="changehost($(this))">异机修复</button>
+        %endif
+        %if node.state in ["DATA_RESTORING"]:
+        <button type="button" class="btn btn-primary" style="width:150px;" id="completerestore" onclick="completerestore($(this))">完成修复</button>
+        %endif
+            <div class="btn-group">
+                <button type='button' class="btn btn-info dropdown-toggle" style="width:150px;" data-toggle='dropdown' data-target="#dropdown">
+                    更多功能...
+                    <span class='caret'></span>
+                </button>
+                <ul class='dropdown-menu' role='menu'>
+                    %if node.state in ["STOPPED"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="expand" data-toggle="modal" data-target="#expandModal" onclick="expand($(this))">增加资源</button>
+                    %endif
+                    %if node.state in ["STOPPED"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="contract" data-toggle="modal" data-target="#contractModal" onclick="contract($(this))">缩减资源</button>
+                    %endif
+                    %if node.state in ["STOPPED","STARTING_FAILED","RUNNING"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="configure" data-toggle="modal" data-target="#configureModal" onclick="configure($(this))">修改参数</button>
+                    %endif
+                    %if node.state in ["STOPPED","STARTING_FAILED","RUNNING"]:
+                    <button type="button" class="btn btn-warning" style="width:150px;" id="initialconfigure" onclick="initialconfigure($(this))">初始化mysql参数</button>
+                    %endif
+                    %if node.state in ["STOPPED","STARTING_FAILED","RUNNING"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="cancelinitial" onclick="cancelinitial($(this))">取消初始化mysql参数</button>
+                    %endif
+                    <button type="button" class="btn btn-info" style="width:150px;" id="configuredetail" data-toggle="modal" data-target="#configuredetailModal" onclick="configuredetail($(this))">mysql参数信息</button>
+                    <button type="button" class="btn btn-info" style="width:150px;" id="mysqllog" data-toggle="modal" data-target="#mysqllogModal" onclick="mysqllog($(this))">查看mysql日志</button>
+                    <button type="button" class="btn btn-info" style="width:150px;" id="detail" data-toggle="modal" data-target="#detailModal" onclick="nodedetail($(this))">详细信息</button>
+                </ul>
+            </div>
+        </div>
+        </td>
+    </tr>
+    %endif
+    %endfor
+    %else:
+    %for node in nodes:
+    <tr class="node" data-toggle="tooltip" data-placement="left" title='${node.latest_error}'>
+        <td>${node.task_id}</td>
+        <td>${node.identity}</td>
+        <td>${node.ip}</td>
+        <td>${node.create_time}</td>
+        <td>${node.latest_action}</td>
+        <td>${node.action_time}</td>
+        <td>${node.sandboxdir}</td>
+        <td>${node.cpus}</td>
+        <td>${node.mem}</td>
+        <td>${node.disk}</td>
+        <td>${node.port}</td>
+        <td>${node.state}</td>
+        <td>
+            <div class="btn-group">
+        %if node.state=="RUNNING":
+        <button type="button" class="btn btn-primary" style="width:150px;" id="stop" onclick="stopnode($(this))">停止节点</button>
+        %endif
+        %if node.state in ["STOPPED","STARTING_FAILED"]:
+        <button type="button" class="btn btn-primary" style="width:150px;" id="start" onclick="startnode($(this))">启动节点</button>
+        %endif
+        %if node.state in ["STOPPED","STAGING_FAILED","STARTING_FAILED","SERVICE_RESTORING_FAILED","PHYSICS_RESTORING_FAILE","CHANGE_HOST_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="delete" onclick="deletenode($(this))">删除节点</button>
+        %endif
+        %if node.state in ["DELETED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="recover" onclick="recovernode($(this))">恢复节点</button>
+        %endif
+        %if node.state in ["DELETED"]:
+        <button type="button" class="btn btn-danger" style="width:150px;" id="recycle" onclick="shiftdeletenode($(this))">资源回收</button>
+        %endif
+        %if node.state in ["SERVICE_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="servicerestore" onclick="servicerestore($(this))">服务修复</button>
+        %endif
+        %if node.state in ["SERVICE_RESTORING_FAILED","PHYSICS_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="physicsrestore" onclick="physicsrestore($(this))">物理修复</button>
+        %endif
+        %if node.state in ["PHYSICS_RESTORING_FAILED","CHANGE_HOST_RESTORING_FAILED"]:
+        <button type="button" class="btn btn-warning" style="width:150px;" id="changehost" onclick="changehost($(this))">异机修复</button>
+        %endif
+         %if node.state in ["DATA_RESTORING"]:
+        <button type="button" class="btn btn-primary" style="width:150px;" id="completerestore" onclick="completerestore($(this))">完成修复</button>
+        %endif
+            <div class="btn-group">
+                <button type='button' class="btn btn-info dropdown-toggle" style="width:150px;" data-toggle='dropdown' data-target="#dropdown">
+                    更多功能...
+                    <span class='caret'></span>
+                </button>
+                <ul class='dropdown-menu' role='menu'>
+                    %if node.state in ["STOPPED"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="expand" data-toggle="modal" data-target="#expandModal" onclick="expand($(this))">增加资源</button>
+                    %endif
+                    %if node.state in ["STOPPED"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="contract" data-toggle="modal" data-target="#contractModal" onclick="contract($(this))">缩减资源</button>
+                    %endif
+                    %if node.state in ["STOPPED","STARTING_FAILED","RUNNING"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="configure" data-toggle="modal" data-target="#configureModal" onclick="configure($(this))">修改参数</button>
+                    %endif
+                    %if node.state in ["STOPPED","STARTING_FAILED","RUNNING"]:
+                    <button type="button" class="btn btn-warning" style="width:150px;" id="initialconfigure" onclick="initialconfigure($(this))">初始化mysql参数</button>
+                    %endif
+                    %if node.state in ["STOPPED","STARTING_FAILED","RUNNING"]:
+                    <button type="button" class="btn btn-primary" style="width:150px;" id="cancelinitial" onclick="cancelinitial($(this))">取消初始化mysql参数</button>
+                    %endif
+                    <button type="button" class="btn btn-info" style="width:150px;" id="configuredetail" data-toggle="modal" data-target="#configuredetailModal" onclick="configuredetail($(this))">mysql参数信息</button>
+                    <button type="button" class="btn btn-info" style="width:150px;" id="mysqllog" data-toggle="modal" data-target="#mysqllogModal" onclick="mysqllog($(this))">查看mysql日志</button>
+                    <button type="button" class="btn btn-info" style="width:150px;" id="detail" data-toggle="modal" data-target="#detailModal" onclick="nodedetail($(this))">详细信息</button>
+                </ul>
+            </div>
+        </div>
+        </td>
+    </tr>
+    %endfor
+    %endif
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="detailModalLabel">detail</h4>
+    </div>
+    <div class="modal-body">
+    <textarea id="textdetail" rows="30" cols="90" readonly="readonly">
+    </textarea>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<div class="modal fade" id="mysqllogModal" tabindex="-1" role="dialog" aria-labelledby="mysqllogModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="mysqllogModalLabel">mysqld.log</h4>
+    </div>
+    <div class="modal-body">
+    <textarea id="textmysqllog" rows="30" cols="90" readonly="readonly">
+    </textarea>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<div class="modal fade" id="configuredetailModal" tabindex="-1" role="dialog" aria-labelledby="configuredetailModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="configuredetailModalLabel">mysqlconfigure</h4>
+    </div>
+    <div class="modal-body">
+    <textarea id="textconfiguredetail" rows="15" cols="90" readonly="readonly">
+    </textarea>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<div class="modal fade" id="configureModal" tabindex="-1" role="dialog" aria-labelledby="configureModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="configureModalLabel">修改mysql参数</h4>
+    </div>
+    <div class="modal-body">
+    <form action="/mysql/configure" method="post" class="form-horizontal" id="configureform">
+     <div class="form-group">
+      <label for="lastname" class="col-sm-3 control-label">请输入参数</label>
+        <div class="col-sm-9">
+            <textarea id="parameter" rows="10" cols="60"></textarea>
+		</div>
+     </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+     <button type="button" id="configurequeren" class="btn btn-primary" data-dismiss="modal">确认</button>
+    </div>
+    </form>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<div class="modal fade" id="contractModal" tabindex="-1" role="dialog" aria-labelledby="contractModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="contractModalLabel">请填写资源</h4>
+    </div>
+    <div class="modal-body">
+    <form action="/mysql/changeresource" method="post" class="form-horizontal" id="contractform">
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">cpus</label>
+        <div class="col-sm-10">
+			<input type="text" name="cpus" class="form-control" id="contractcpu">
+		</div>
+     </div>
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">内存</label>
+         <div class="col-sm-10">
+			<input type="text" name="mem" class="form-control" id="contractmem">
+		</div>
+     </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+     <button type="button" id="contractqueren" class="btn btn-primary" data-dismiss="modal">确认</button>
+    </div>
+    </form>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<div class="modal fade" id="expandModal" tabindex="-1" role="dialog" aria-labelledby="expandModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="expandModalLabel">请填写资源</h4>
+    </div>
+    <div class="modal-body">
+    <form action="/mysql/changeresource" method="post" class="form-horizontal" id="expandform">
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">cpus</label>
+        <div class="col-sm-10">
+			<input type="text" name="cpus" class="form-control" id="expandcpu">
+		</div>
+     </div>
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">内存</label>
+         <div class="col-sm-10">
+			<input type="text" name="mem" class="form-control" id="expandmem">
+		</div>
+     </div>
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">磁盘</label>
+         <div class="col-sm-10">
+			<input type="text" name="disk" class="form-control" id="expanddisk">
+		</div>
+     </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+     <button type="button" id="expandqueren" class="btn btn-primary" data-dismiss="modal">确认</button>
+    </div>
+    </form>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<!-- container -->
+<script src="/static/jquery.min.js"></script>
+<script src="/static/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setInterval("get_new()",3000);
+        });
+
+    function get_new()
+            {
+                if ($("#expandModal").is(":hidden")&&$("#detailModal").is(":hidden")
+                        &&$("#dropdown").is(":hidden")&&$("#contractModal").is(":hidden")
+                        &&$("#configureModal").is(":hidden")&&$("#configuredetailModal").is(":hidden")
+                        &&$("#mysqllogModal").is(":hidden")){
+                 location.reload(true);
+                }
+            }
+
+    function nodedetail(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.get("/mysql/getmessage",
+                {node_name:name},
+           function(data) {
+               var parsedJson = JSON.parse(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                } else {
+                    var detail=parsedJson.data;
+                    var send_detai = [];
+                    for(var i=0;i<detail.length;i++){
+                        if (detail[i]['task_id']==name){
+                            var tirtle = name;
+                            for (var prop in detail[i]) {
+                                 if ( prop=='count'||prop=='change'||prop=='reourcechange'||prop=='persist_id'||prop=='max_count'||prop=='backup_id'){
+                            continue;
+                            }
+                            send_detai.push(prop + " = " + detail[i][prop]);
+                            }
+                        }
+                    }
+                    $("#detailModalLabel").text(tirtle);
+                    var textdetail = document.getElementById("textdetail");
+                    $('#textdetail').val(send_detai.join('\n '));
+                }
+            });
+    }
+
+    function configuredetail(ob) {
+        var name = ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/configure",
+                {task_id: name},
+                function (data) {
+                    var parsedJson = JSON.parse(data);
+                    if (parsedJson.result == "failed") {
+                        alert("请求失败:" + parsedJson.message);
+                    } else {
+                        var configuredetail=parsedJson.message;
+                        $("#configuredetailModalLabel").text(name + " configure");
+                        var textconfiguredetail = document.getElementById("textconfiguredetail");
+                        $('#textconfiguredetail').text(configuredetail);
+                    }
+                });
+    }
+
+    function mysqllog(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/mysqllog",
+                {task_id:name},
+           function(data) {
+               var parsedJson = JSON.parse(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                } else {
+                    var mysqllog=parsedJson.data;
+                    $("#mysqllogModalLabel").text(name+" mysqld.log");
+                    var textmysqllog = document.getElementById("textmysqllog");
+                    $('#textmysqllog').text(mysqllog);
+                }
+            });
+    }
+
+    function startnode(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/startnode",
+                {task_id:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+    function stopnode(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/stopnode",
+                {task_id:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+        function shiftdeletenode(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/shiftdeletenode",
+                {task_id:name},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+    function deletenode(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/deletenode",
+                {task_id:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+        function recovernode(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/startnode",
+                {task_id:name},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+         location.reload(true);
+        return false;
+    }
+    function servicerestore(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/servicerestore",
+                {task_id:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+    function physicsrestore(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/physicsrestore",
+                {task_id:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+    function changehost(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/changehost",
+                {task_id:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+
+    function completerestore(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/completedatarestore",
+                {task_id:name,is_mini:"",
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+
+    function initialconfigure(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/configure",
+                {task_id:name,initial:1},
+           function(data) {
+                var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                } else {
+                    alert("请求成功:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+
+    function cancelinitial(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        $.post("/mysql/configure",
+                {task_id:name,initial:0},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                } else {
+                    alert("请求成功:"+ parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+
+    function configure(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        var form = $("#configureform");
+        form.submit(function () {
+           var configuration = document.getElementById("parameter").value;
+           $.post(form.attr("action"),
+                   {"task_id":name,"configuration":configuration},
+           function(data) {
+                var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("增加参数失败："+parsedJson.message);
+                } else {
+                    alert("增加参数成功："+parsedJson.message);}
+            });
+            location.reload(true);
+            return false;
+        });
+    }
+    $("#configurequeren").click(function () {
+        $("#configureform").submit();});
+
+    function expand(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        var form = $("#expandform");
+        form.submit(function () {
+            var o = {};
+            var a = form.serializeArray();
+            $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value);
+            } else {
+            o[this.name] = this.value;
+            }
+            });
+            var resources=JSON.stringify(o);
+           $.post(form.attr("action"),
+                   {"task_id":name,"resources":resources,"action":"expand",
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("增加资源失败："+parsedJson.message);
+                }
+            });
+            location.reload(true);
+            return false;
+        });
+    }
+    $("#expandqueren").click(function () {
+        $("#expandform").submit();});
+
+    function contract(ob) {
+        var name=ob.parent("ul").parent("div").parent("div").parent("td").parent("tr").children("td").eq(0).html();
+        var form = $("#contractform");
+        form.submit(function () {
+            var o = {};
+            var a = form.serializeArray();
+            $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value);
+            } else {
+            o[this.name] = this.value;
+            }
+            });
+            var resources=JSON.stringify(o);
+           $.post(form.attr("action"),
+                   {"task_id":name,"resources":resources,"action":"contract",
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("资源失败："+parsedJson.message);
+                }
+            });
+            location.reload(true);
+            return false;
+        });
+    }
+    $("#contractqueren").click(function () {
+        $("#contractform").submit();});
+</script>
+</body>
+</html>
