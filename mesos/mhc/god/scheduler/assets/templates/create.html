@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create service</title>
+  <meta http-equiv="refresh" content="300">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    tr.node {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container" style="width: 90%">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Hyaline</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Clusters</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="/nodes">Nodes</a></li>
+      </ul>
+            <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/info" target="_blank">LOG</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/info/download">download</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/error" target="_blank">ERROR</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/error/download">download</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <button  type="button" class="btn btn-default navbar-btn">
+      <a href="/createservice">创建服务</a>
+      </button>
+      </ul>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</div>
+
+<div class="container">
+  <h1>Create service</h1>
+  <form action="/mysql/createcluster" method="post" class="form-horizontal" id="form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">集群名称</label>
+				<div class="col-sm-10">
+					<input class="form-control" id="clustername" required="required" name="cluster_name" placeholder="请输入集群名称" type="text" value="">
+                    <button type="button" class="btn btn-sm btn-default" id="master" onclick="getclustername()">随机</button>
+				</div>
+			</div>
+			<div class="form-group" id="second">
+				<label for="lastname" class="col-sm-2 control-label">集群方式</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="cluster_mode" id="clusterType">
+						<option selected="selected" value="MS">MS</option>
+						<option value="MMS">MMS</option>
+                        <option value="GR">GR</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group slave">
+               <label for="slave" class="col-sm-2 control-label">SLAVE个数</label>
+				<div class="col-sm-10">
+					<input class="form-control" id="slave"  required="required" name="num_slaves" placeholder="请输入slave个数" type="text" value="1">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">数据库版本</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="mysql_version">
+                            <option value="5.6">5.6</option>
+							<option selected="selected" value="5.7">5.7</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="firstname" class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-10">
+					<input class="form-control" id="firstname" required="required" name="cluster_user" placeholder="root" onblur="strCount(this,userName)" type="text" value="root">
+					<div id="userName"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">密码</label>
+				<div class="col-sm-10">
+					<input class="form-control" id="lastname" required="required" name="cluster_password" placeholder="请输入密码" onblur="strCount(this,userPass)" type="password" value="1234">
+					<div id="userPass"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">CPU</label>
+                <div class="col-sm-10">
+					<input class="form-control" id="lastname" required="required" name="cpus" placeholder="请输入CPU个数"  type="text" value="0.5">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">内存</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="lastname" required="required" name="mem" placeholder="请输入内存大小,单位b/k/m/g"  type="text" value="1g">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">存储</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="lastname" required="required" name="disk" placeholder="请输入磁盘大小,单位b/k/m/g"  type="text" value="1g">
+				</div>
+			</div>
+            <div class="form-group mastercpu">
+				<label for="lastname" class="col-sm-2 control-label">Master CPU</label>
+                <div class="col-sm-10">
+					<input class="form-control" id="mastercpu" name="master_cpus" placeholder="请输入CPU个数"  type="text">
+				</div>
+			</div>
+			<div class="form-group mastermem">
+				<label for="lastname" class="col-sm-2 control-label">Master 内存</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="mastermem" name="master_mem" placeholder="请输入内存大小,单位b/k/m/g"  type="text">
+				</div>
+			</div>
+			<div class="form-group masterdisk">
+				<label for="lastname" class="col-sm-2 control-label">Master 存储</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="masterdisk" name="master_disk" placeholder="请输入磁盘大小,单位b/k/m/g"  type="text">
+				</div>
+			</div>
+            <div class="form-group" id="binlog">
+				<label for="lastname" class="col-sm-2 control-label">binlog格式</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="binlog_format" id="binlog_format">
+						<option selected="selected" value="ROW">ROW</option>
+						<option value="STATEMENT">STATEMENT</option>
+                        <option value="MIXED">MIXED</option>
+					</select>
+				</div>
+			</div>
+            <div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">租户Id</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="lastname" name="tenantId"  type="text">
+				</div>
+			</div>
+            <div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">工单Id</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="lastname" name="resourceId"  type="text">
+				</div>
+			</div>
+            <div class="form-group">
+				 <label for="" class="col-sm-3 control-label">独占磁盘 <input type="checkbox" name="exclusive" value="1"></label>
+                <label for="" class="col-sm-2 control-label">gtid <input type="checkbox" name="is_gtid" value="1"></label>
+                <label for="" class="col-sm-2 control-label">多线程复制<input type="checkbox" name="slave_parallel" value="1"></label>
+                <label for="" class="col-sm-2 control-label">半同步复制<input type="checkbox" name="replication_mode" value="semisync"></label>
+			</div>
+			<div class="btn-group btn-group-lg" style="margin-left: 100px;">
+				<button type="button" class="btn btn-primary" id="create" onclick="formsubmit();">创建</button>
+			</div>
+            <div class="btn-group btn-group-lg" style="margin-left: 100px;">
+				<button type="reset" class="btn btn-primary" id="reset" onclick="hidemaster()">重置</button>
+			</div>
+            <div class="btn-group btn-group-lg" style="margin-left: 100px;">
+				<button type="button" class="btn btn-primary" id="master" onclick="showmaster()">自定义master</button>
+			</div>
+		</form>
+</div>
+<!-- container -->
+<script src="/static/jquery.min.js"></script>
+<script src="/static/bootstrap.min.js"></script>
+<script language="javascript" type="text/javascript">
+	function strCount(str,id) {
+		if (str.value.length < 4) {
+			$("#butt").attr("type", "button");
+			$(id).html("长度不得小于4位");
+			$(id).css("color", "red");
+			return;
+		} else {
+			$("#butt").attr("type", "submit");
+			$(id).html("");
+		}
+	}
+
+	function getclustername() {
+        var num = Math.random()*1000;
+        num = parseInt(num, 10);
+        var name = "mysql_"+num.toString();
+        document.getElementById('clustername').value=name;
+	}
+	getclustername();
+
+    function showmaster() {
+        $('.mastercpu').show();
+        $('.mastermem').show();
+        $('.masterdisk').show();
+	}
+    function hidemaster() {
+        $('.mastercpu').hide();
+        $('.mastermem').hide();
+        $('.masterdisk').hide();
+	}
+
+    $(document).ready(function () {
+        $('.mastercpu').hide();
+        $('.mastermem').hide();
+        $('.masterdisk').hide();
+        var form = $("#form");
+        var iden_input = $('<input type="text" name="identity" style="display:none" />');
+        iden_input.attr('value', "shell");
+        form.append(iden_input);
+        form.submit(function () {
+           $.post(form.attr("action"),
+           form.serialize(),
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert(parsedJson.message);
+                } else {
+                    window.location.href ="/";
+                }
+
+            });
+            return false;
+        });
+        $("#create").click(function () {
+        form.submit();
+        });
+    });
+</script>
+</body>
+</html>

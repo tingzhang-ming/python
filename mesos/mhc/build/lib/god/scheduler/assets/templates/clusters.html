@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hyaline Clusters</title>
+  <meta http-equiv="refresh" content="300">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    tr.cluster {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container" style="width: 90%">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Hyaline</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Clusters</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li  background-color="#0000FF"><a href="/nodes">Nodes</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/info" target="_blank">LOG</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+
+       <li background-color="#0000FF"><a href="/mysql/log/info/download">download</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/error" target="_blank">ERROR</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+       <li background-color="#0000FF"><a href="/mysql/log/error/download">download</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <button  type="button" class="btn btn-default navbar-btn">
+      <a href="/createservice">创建服务</a>
+      </button>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</div>
+
+<div class="container-fluid">
+  <h1>Clusters</h1>
+  <!-- TODO: ajax -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>user</th>
+      <th>num nodes</th>
+      <th>mode</th>
+      <th>version</th>
+      <th>createtime</th>
+      <th>cpus</th>
+      <th>mem(mb)</th>
+      <th>disk(gb)</th>
+      <th>state</th>
+    </tr>
+    </thead>
+    <tbody>
+    %for cluster in clusters:
+    <tr class="cluster" data-toggle="tooltip" data-placement="left" title='${cluster.latest_error}'>
+      <td><a href="/nodes?cluster_name=${cluster.name}">${cluster.name}</a></td>
+      <td>${cluster.user}</td>
+      <td>${cluster.num_nodes}</td>
+      <td>${cluster.mode}</td>
+      <td>${cluster.mysqlversion}</td>
+      <td>${cluster.createtime}</td>
+      <td>${cluster.total_cpus}</td>
+      <td>${cluster.total_mem_mb}</td>
+      <td>${cluster.total_disk_mb}</td>
+      <td>${cluster.state}</td>
+      <td style="border-right:none;">
+          <div class="btn-group">
+      %if cluster.state=="RUNNING":
+      <button type="button" class="btn btn-primary" id="addnode" data-toggle="modal" data-target="#myModal" onclick="addnode($(this))">增加节点</button>
+      %endif
+      %if cluster.state=="RUNNING":
+      <button type="button" class="btn btn-primary" id="stop" onclick="stopcluster($(this))">停止集群</button>
+      %endif
+      %if cluster.state in ["STOPPED","STARTING_FAILED"]:
+      <button type="button" class="btn btn-primary" id="start" onclick="startcluster($(this))">启动集群</button>
+      %endif
+      %if cluster.state in ["INITIALIZING_FAILED",]:
+      <button type="button" class="btn btn-primary" id="reinitial" onclick="reinitialcluster($(this))">重新创建</button>
+      %endif
+      %if cluster.state in ["STOPPED","STARTING_FAILED","INITIALIZING_FAILED",]:
+      <button type="button" class="btn btn-warning" id="delete" onclick="deletecluster($(this))">删除集群</button>
+      %endif
+      %if cluster.state in ["DELETED"]:
+      <button type="button" class="btn btn-warning" id="recover" onclick="recovercluster($(this))">恢复集群</button>
+      %endif
+      %if cluster.state in ["DELETED"]:
+      <button type="button" class="btn btn-danger" id="recycle" onclick="shiftdeletecluster($(this))">资源回收</button>
+      %endif
+      <button type="button" class="btn btn-info" id="detail" data-toggle="modal" data-target="#detailModal" onclick="clusterdetail($(this))">详细信息</button>
+        </div>
+      </td>
+    </tr>
+    %endfor
+    </tbody>
+  </table>
+</div>
+<!-- container -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="myModalLabel">请设置节点资源</h4>
+    </div>
+    <div class="modal-body">
+    <form action="/mysql/addnode" method="post" class="form-horizontal" id="addform">
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">cpus</label>
+        <div class="col-sm-10">
+			<input type="text" name="cpus" class="form-control" id="addcpu">
+		</div>
+     </div>
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">内存</label>
+         <div class="col-sm-10">
+			<input type="text" name="mem" class="form-control" id="addmem">
+		</div>
+     </div>
+     <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">磁盘</label>
+         <div class="col-sm-10">
+			<input type="text" name="disk" class="form-control" id="adddisk">
+		</div>
+     </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+     <button type="button" id="addqueren" class="btn btn-primary" data-dismiss="modal">确认</button>
+    </div>
+    </form>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+     <h4 class="modal-title" id="detailModalLabel">detail</h4>
+    </div>
+    <div class="modal-body">
+    <textarea id="textdetail" rows="30" cols="90" readonly="readonly">
+    </textarea>
+   </div>
+  </div>
+  </div>
+ </div>
+
+<script src="/static/jquery.min.js"></script>
+<script src="/static/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function gotoClusterDetail(ob) {
+        var name=ob.html();
+        $.get("/nodes",
+                {cluster_name:name}
+            );
+    }
+
+    $(document).ready(function () {
+        setInterval("get_new()",3000);
+        });
+    function get_new()
+            {
+                if ($("#detailModalLabel").is(":hidden")&&$("#myModal").is(":hidden")){
+                 location.reload(true);
+                }
+            }
+
+    function clusterdetail(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.get("/mysql/getmessage",
+                {cluster_name:name},
+           function(data) {
+               var parsedJson = JSON.parse(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                } else {
+                    var detail=parsedJson.data[0];
+                    var tirtle = detail["name"];
+                    var send_detai = [];
+                    for (var prop in detail) {
+                        if ( prop=='tasks'||prop=='first_port'||prop=='mini_tasks'||prop==' cycle_count '||prop=='max_cycle'||prop=='backup_id'||prop=='cycle_count'){
+                            continue;
+                        }
+                        send_detai.push(prop + " = " + detail[prop]);
+                    }
+                    $("#detailModalLabel").text(tirtle);
+                    var textdetail = document.getElementById("textdetail");
+                    $('#textdetail').val(send_detai.join('\n '));
+                }
+            });
+    }
+
+    function addnode(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        var form = $("#addform");
+        var name_input = $('<input type="text" name="cluster_name" style="display:none" />');
+        name_input.attr('value', name);
+        form.append(name_input);
+        var iden_input = $('<input type="text" name="identity" style="display:none" />');
+        iden_input.attr('value', "shell");
+        form.append(iden_input);
+        form.submit(function () {
+           $.post(form.attr("action"),
+                   form.serialize(),
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("增加失败："+parsedJson.message);
+                    location.reload(true);
+                } else {
+                    window.location.href ="/nodes?cluster_name="+name;
+                }
+            });
+            return false;
+        });
+    }
+    $("#addqueren").click(function () {
+        $("#addform").submit();
+  });
+    function startcluster(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.post("/mysql/startcluster",
+                {cluster_name:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+
+    function reinitialcluster(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.post("/mysql/reinitialize",
+                {cluster_name:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+
+    function stopcluster(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.post("/mysql/stopcluster",
+                {cluster_name:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+    function shiftdeletecluster(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.post("/mysql/shiftdeletecluster",
+                {cluster_name:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+    function deletecluster(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.post("/mysql/deletecluster",
+                {cluster_name:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+        location.reload(true);
+        return false;
+    }
+        function recovercluster(ob) {
+        var name=ob.parent("div").parent("td").parent("tr").children("td").eq(0).children("a").html();
+        $.post("/mysql/recovercluster",
+                {cluster_name:name,
+                identity:"shell"},
+           function(data) {
+               var parsedJson = jQuery.parseJSON(data);
+                if (parsedJson.result == "failed"){
+                    alert("请求失败:"+parsedJson.message);
+                }
+            });
+         location.reload(true);
+        return false;
+    }
+</script>
+</body>
+</html>
