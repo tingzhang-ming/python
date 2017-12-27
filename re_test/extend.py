@@ -66,5 +66,62 @@ def t6():
     # http: // www.google.com
     # http: // code.google.com
 
+
+def t7():
+    patt = '\((?P<areacode>\d{3})\) (?P<prefix>\d{3})-(?:\d{4})'
+    print re.search(patt, '(800) 555-1212').groupdict()
+    # {'areacode': '800', 'prefix': '555'}
+
+
+def t8():
+    patt = '\((?P<areacode>\d{3})\) (?P<prefix>\d{3})-(?:\d{4})'
+    print re.sub(patt, '(\g<areacode>) \g<prefix>-xxx', '(800) 555-1212')
+    # (800) 555-xxx
+
+
+def t9():
+    data = '''
+    Guido van Rossum
+    Tim Peters
+    Alex Martelli
+    Just van Rossum
+    Raymond Hettinger
+    '''
+    print re.findall('\w+(?= van Rossum)', data)
+    # ['Guido', 'Just']
+
+
+def t10():
+    data = '''
+     sales@phptr.com
+     postmaster@phptr.com
+     eng@phptr.com
+     noueply@phptr.com
+     admin@phptr.com
+    '''
+    print re.findall('(?m)^\s+(?!noueply|postmaster)(\w+)', data)
+    # ['sales', 'eng', 'admin']
+
+
+def t11():
+    data = '''
+     sales@phptr.com
+     postmaster@phptr.com
+     eng@phptr.com
+     noueply@phptr.com
+     admin@phptr.com
+    '''
+    print ['%s@aw.com' % e.group(1) for e in re.finditer('(?m)^\s+(?!noueply|postmaster)(\w+)', data)]
+    # ['sales@aw.com', 'eng@aw.com', 'admin@aw.com']
+
+
+# 匹配两个紧挨着不重复
+def t12():
+    print bool(re.search('(?:(x)|y)(?(1)y|x)', 'xy'))
+    print bool(re.search('(?:(x)|y)(?(1)y|x)', 'xx'))
+    # True
+    # False
+
+
 if __name__ == '__main__':
-    t6()
+    t12()
