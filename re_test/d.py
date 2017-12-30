@@ -19,6 +19,10 @@ def t2():
         print re.split(', | (?=(?:\d{5}|[A-Z]{2}))', datum)
 
 
+def t21():
+    return re.split(', | (?=(?:\d{5}|[A-Z]{2}))', data[0])
+
+
 def t3():
     for datum in data:
         m = re.findall(' (?:\d{5}|[A-Z]{2})', datum)
