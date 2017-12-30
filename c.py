@@ -20,6 +20,16 @@ def t2():
         print e.__class__.__name__
 
 
+def t3():
+    jf = 'ms.json'
+    print jf.split('.json')[0]
+
+
+def t4():
+    sys.stderr.write('hahaha')
+    sys.stderr.write('hahaha2')
+
+
 if __name__ == '__main__':
-    t2()
+    t4()
 

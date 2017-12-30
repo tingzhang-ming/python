@@ -12,9 +12,11 @@ class ShellException(Exception):
 
 
 def run_command(command):
-    proc = subprocess.Popen(command.split(' '),
+    print command.split(' ')
+    proc = subprocess.Popen(command,
                             stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE)
+                            stderr=subprocess.PIPE,
+                            shell=True)
     proc.wait()
 
     stdout, stderr = proc.communicate()
@@ -22,3 +24,11 @@ def run_command(command):
         raise ShellException(proc.returncode, stdout.strip(), stderr.strip())
 
     return stdout.strip()
+
+
+def t1():
+    run_command('/usr/bin/docker-compose --file /root/gitSwarm/dbcm-base-managers/compose/mysql.yml --project-name mysqlms832  scale mysql=2')
+
+
+if __name__ == '__main__':
+    t1()

@@ -17,5 +17,11 @@ def t2():
     # o
     # o
 
+
+def t3():
+    match = re.search(r'fox', text)
+    print match.group()
+    # fox
+
 if __name__ == '__main__':
-    t2()
+    t3()

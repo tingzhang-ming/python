@@ -21,5 +21,10 @@ def t3():
     # 41
     # 141
 
+
+def t4():
+    print map(lambda x, y: max([x, y]), [1, 2, 3], [2, 5, 0])
+    # [2, 5, 3]
+
 if __name__ == '__main__':
-    t3()
+    t4()
