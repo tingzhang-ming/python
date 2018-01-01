@@ -7,9 +7,10 @@ import botocore.exceptions
 os.environ['https_proxy'] = '109.105.4.17:8119'
 
 s3 = boto3.resource('s3',
-                    region_name='us-east-1',
-                    aws_access_key_id='',
-                    aws_secret_access_key='')
+                    endpoint_url='http://111.230.251.217:9001',
+                    # region_name='us-east-1',
+                    aws_access_key_id='9KI2JYRUM9N2KFSV3D81',
+                    aws_secret_access_key='a49tBb4+AQPFGdIFHHj4Rc6y+cTttBKZzzi8qSrA')
 
 # ValueError: Invalid endpoint: https://s3.region=us-east-1.amazonaws.com
 
@@ -27,10 +28,10 @@ def t1():
 
 def t11():
     data = open('/root/github/python/s3_test/test.txt', 'rb')
-    s3.Bucket('dbelt').put_object(Key='mhc/test2                                                                                .txt', Body=data)
+    s3.Bucket('dbelt').put_object(Key='mhc/test2.txt', Body=data)
     data.close()
 
-t11()
+# t11()
 
 # delete
 def t2():
