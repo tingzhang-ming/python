@@ -26,5 +26,13 @@ def t4():
     print map(lambda x, y: max([x, y]), [1, 2, 3], [2, 5, 0])
     # [2, 5, 3]
 
+
+def t5():
+    def test(a):
+        # print a
+        return a
+    t = lambda: test('hello')
+    print t()
+
 if __name__ == '__main__':
-    t4()
+    t5()
