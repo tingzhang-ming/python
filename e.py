@@ -21,5 +21,9 @@ def t3():
     for i in range(0, 1):
         print 1 * 10 ** i
 
+
+def t4():
+    print max(1, 2)
+
 if __name__ == "__main__":
-    t3()
+    t4()
