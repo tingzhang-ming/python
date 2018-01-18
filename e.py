@@ -11,7 +11,7 @@ def t2():
 
 
 def t3():
-    print time.ctime(1515031985)
+    print 0 * 100 / 0
 
 
 if __name__ == '__main__':
