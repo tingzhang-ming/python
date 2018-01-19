@@ -7,10 +7,10 @@ import botocore.exceptions
 os.environ['https_proxy'] = '109.105.4.17:8119'
 
 s3 = boto3.resource('s3',
-                    endpoint_url=None,
+                    endpoint_url='http://109.105.4.65:9001',
                     region_name='us-east-1',
-                    aws_access_key_id='',
-                    aws_secret_access_key='')
+                    aws_access_key_id=' IW89KKUNNXT1LGSS6GLB',
+                    aws_secret_access_key='3xCkdgO3TDjeFVfr7kFHMCRoip0BDzmnVxIeeMyv')
 
 # ValueError: Invalid endpoint: https://s3.region=us-east-1.amazonaws.com
 
@@ -33,11 +33,14 @@ def t11():
 
 # t11()
 
+
 # delete
 def t2():
     ob = s3.Bucket('dbelt').Object('test.jpg')
     ob.delete()
 
+
+t2()
 
 def delete_all():
     path = "dumps/release_manager_201801081914"
