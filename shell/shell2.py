@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 
@@ -18,6 +19,7 @@ def run_command(command):
                             stderr=subprocess.PIPE,
                             shell=True)
     proc.wait()
+    print proc.pid
 
     stdout, stderr = proc.communicate()
     if proc.returncode > 0:
@@ -27,7 +29,8 @@ def run_command(command):
 
 
 def t1():
-    run_command('/usr/bin/docker-compose --file /root/gitSwarm/dbcm-base-managers/compose/mysql.yml --project-name mysqlms832  scale mysql=2')
+    os.killpg(11)
+    run_command('')
 
 
 if __name__ == '__main__':

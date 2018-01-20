@@ -10,7 +10,7 @@ def grep(pattern):
 
 if __name__ == '__main__':
     g = grep('python')
-    g.next()
+    g.next()  # or next(g)
     g.send("Yeah, but no, but ..")
     g.send("A series of tubes")
     g.send("python generators rock")

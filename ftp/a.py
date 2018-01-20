@@ -91,10 +91,9 @@ def t21():
     ftp.connect('109.105.4.65', port, timeout)  # 连接FTP服务器
     ftp.login('test', 'test')  # 登录
     print ftp.getwelcome()  # 获得欢迎信息
-    ftp.cwd('mhc')  # 设置FTP路径
     path = '/root/github/python/s3_test/test.txt'
     stream = StreamReader(open(path, 'rb'), 'test.txt')
-    ftp.storbinary('STOR ' + os.path.basename(path), stream)  # 上传FTP文件
+    ftp.storbinary('STOR mhc/' + os.path.basename(path), stream)  # 上传FTP文件
     ftp.quit()  # 退出FTP服务器
 
 
@@ -188,15 +187,35 @@ def t6():
     port = 21
     ftp.connect('109.105.4.65', port, timeout)  # 连接FTP服务器
     ftp.login('test', 'test')  # 登录
-    path = 'mhc3/mm/ddf'
+    path = 'test/configs'
+    ori = ftp.pwd()
+    print ori
     paths = path.split('/')
     for path in paths:
+        print path
         if path not in ftp.nlst():
             ftp.mkd(path)
         ftp.cwd(path)
+    ftp.cwd(ori)
+    print ftp.nlst()
+    ftp.quit()  # 退出FTP服务器
+
+
+def t7():
+    ftp = FTP()
+    timeout = 30
+    port = 21
+    ftp.connect('109.105.4.65', port, timeout)  # 连接FTP服务器
+    ftp.connect('109.105.4.65', port, timeout)  # 连接FTP服务器
+    ftp.login('test', 'test')  # 登录
+    print ftp.getwelcome()  # 获得欢迎信息
+    ftp.quit()  # 退出FTP服务器
+    ftp.connect('109.105.4.65', port, timeout)  # 连接FTP服务器
+    ftp.login('test', 'test')  # 登录
+    print ftp.getwelcome()  # 获得欢迎信息
     ftp.quit()  # 退出FTP服务器
 
 
 if __name__ == '__main__':
-    t51()
+    t21()
 

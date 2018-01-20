@@ -13,6 +13,9 @@ client = pymanta.MantaClient(
     account,
     disable_ssl_certificate_validation=is_tls,
     signer=signer)
-bucket = '/{}/stor/{}'.format(account, "mhc")
+bucket = '/{}/stor/dbau'.format(account)
 
-client.mkdir(bucket)
+# client.mkdir('{}/multiazjubin'.format(bucket), parents=True)
+
+for i in client.list_directory(bucket):
+    print i['name']

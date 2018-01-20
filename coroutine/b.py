@@ -1,4 +1,6 @@
+# encoding: utf-8
 import time
+# 监控文件的内容增加
 
 
 def follow(thefile, target):
@@ -27,5 +29,8 @@ def printer():
 
 
 if __name__ == '__main__':
-    with open('/root/github/python/s3_test/test.txt') as f:
-        follow(f, printer())
+    try:
+        with open('/root/github/python/s3_test/test.txt') as f:
+            follow(f, printer())
+    except KeyboardInterrupt:
+        print "exit"

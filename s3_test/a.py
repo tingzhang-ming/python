@@ -4,12 +4,12 @@ import boto3
 import botocore.exceptions
 
 # os.environ['http_proxy'] = '109.105.4.17:8119'
-# os.environ['https_proxy'] = '109.105.4.17:8119'
+os.environ['https_proxy'] = '109.105.4.17:8119'
 
 s3 = boto3.resource('s3',
                     endpoint_url='http://109.105.4.65:9001',
                     region_name='us-east-1',
-                    aws_access_key_id='IW89KKUNNXT1LGSS6GLB',
+                    aws_access_key_id=' IW89KKUNNXT1LGSS6GLB',
                     aws_secret_access_key='3xCkdgO3TDjeFVfr7kFHMCRoip0BDzmnVxIeeMyv')
 
 # ValueError: Invalid endpoint: https://s3.region=us-east-1.amazonaws.com
@@ -33,10 +33,30 @@ def t11():
 
 # t11()
 
+
 # delete
 def t2():
     ob = s3.Bucket('dbelt').Object('test.jpg')
     ob.delete()
+
+
+t2()
+
+def delete_all():
+    path = "dumps/release_manager_201801081914"
+    client = s3.Bucket('dbelt')
+    files = []
+    for obj in client.objects.all():
+        patt = '(^%s)/.*[^/]' % path.rstrip('/')
+        result = re.search(patt, obj.key)
+        if result:
+            files.append(result.group())
+            client.Object(result.group()).delete()
+    for f in files:
+        print f
+    print "========================="
+
+# delete_all()
 
 
 def t21():
@@ -72,7 +92,9 @@ def t4():
     print '-----------'
     for obj in bucket.objects.all():
         print(obj.key)
+        print obj.size
 
+t4()
 
 def get_files(d):
     res = []
