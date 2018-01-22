@@ -11,6 +11,10 @@ def t1():
     print a[:i+1].extend(tmp)
 
 
+def t2():
+    print range(0, 9, 3)
+
+
 if __name__ == '__main__':
-    t1()
+    t2()
 
