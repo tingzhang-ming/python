@@ -1,21 +1,16 @@
-import time
 
 
 def t1():
-    a = 'adfdf'
-    print a.title()
-
-
-def t2():
-    print time.time()
-
-
-def t3():
-    a = [1,2,3,4,4]
-    print a.pop()
+    a = [2, 3, 1]
+    i = 0
+    print a[:i+1]
+    tmp = a[i+1:]
+    tmp.reverse()
+    print tmp
     print a
-
+    print a[:i+1].extend(tmp)
 
 
 if __name__ == '__main__':
-    t3()
+    t1()
+
