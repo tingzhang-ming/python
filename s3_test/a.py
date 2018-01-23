@@ -6,6 +6,8 @@ import botocore.exceptions
 # os.environ['http_proxy'] = '109.105.4.17:8119'
 os.environ['https_proxy'] = '109.105.4.17:8119'
 
+os.environ['LOG_LEVEL'] = 'DEBUG'
+
 s3 = boto3.resource('s3',
                     endpoint_url='http://109.105.4.65:9001',
                     region_name='us-east-1',
@@ -40,10 +42,10 @@ def t2():
     ob.delete()
 
 
-t2()
+# t2()
 
 def delete_all():
-    path = "dumps/release_manager_201801081914"
+    path = "test/backups"
     client = s3.Bucket('dbelt')
     files = []
     for obj in client.objects.all():
@@ -56,7 +58,38 @@ def delete_all():
         print f
     print "========================="
 
-# delete_all()
+delete_all()
+
+
+def list_files(path):
+    client = s3.Bucket('dbelt')
+    files = []
+    for obj in client.objects.all():
+        patt = '(^%s)/.*[^/]' % path.rstrip('/')
+        result = re.search(patt, obj.key)
+        if result:
+            files.append(result.group())
+    return files
+
+
+def list_directory(path='test/backups'):
+    client = s3.Bucket('dbelt')
+    directories = {}
+    all_obs = client.objects.all()
+    for obj in all_obs:
+        patt = '(?<=(?:(^%s)/)).*(?=(?:/))' % path.rstrip('/')
+        result = re.search(patt, obj.key)
+        if result:
+            dir_name = result.group()
+            if dir_name not in directories:
+                directories[dir_name] = 0
+            if not obj.key.endswith('/') and hasattr(obj, 'size'):
+                directories[dir_name] += obj.size
+    return [{"name": k, "size": v} for k, v in directories.items()]
+
+
+
+# print list_directory()
 
 
 def t21():
@@ -94,7 +127,7 @@ def t4():
         print(obj.key)
         print obj.size
 
-t4()
+# t4()
 
 def get_files(d):
     res = []
