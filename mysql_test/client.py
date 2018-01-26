@@ -66,12 +66,15 @@ class MySQL(object):
         while timeout > 0:
             try:
                 sock = '/var/run/mysqld/mysqld.sock'
-                return mysqlconn.connect(unix_socket=sock,
+                return mysqlconn.connect(
+                                         # unix_socket=sock,
+                                         host='localhost',
                                          user=user,
                                          password=password,
                                          database=database,
                                          charset='utf8',
-                                         connection_timeout=timeout)
+                                         connection_timeout=timeout,
+                                         port=32935)
             except MySQLError as ex:
                 timeout = timeout - 1
                 if timeout == 0:
@@ -209,5 +212,11 @@ def t1():
     c.mysqlslavetrx(ports=[33337, 33340])
 
 
+def t2():
+    c = MySQL()
+    result = c.query('show status like "wsrep_cluster_status";')
+    print result[0]['Value']
+
+
 if __name__ == '__main__':
-    t1()
+    t2()

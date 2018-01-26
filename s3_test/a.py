@@ -100,14 +100,14 @@ def t21():
 # download
 def t3():
     try:
-        s3.Bucket('dbelt').download_file('test/backups/testbackup/testbackup_00000001', '/root/github/python/s3_test/d.txt')
+        s3.Bucket('dbelt').download_file('test/backups/testbackup/metadata', '/root/github/python/s3_test/d.txt')
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
             print("The object does not exist.")
         else:
             raise
 
-# t3()
+t3()
 
 class MockWrite(object):
 
