@@ -13,7 +13,10 @@ def t1():
         a.clear()
 
 
+def t2():
+    for i in range(5, 0, -1):
+        print i
+
 
 if __name__ == '__main__':
-    t1()
-    print a
+    t2()
