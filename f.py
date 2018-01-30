@@ -18,5 +18,9 @@ def t2():
         print i
 
 
+def t3():
+    print 235345 & 0x7fffffff
+
+
 if __name__ == '__main__':
-    t2()
+    t3()
