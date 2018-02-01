@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 
-def radix_sort_lds(arr):
+def radix_sort_lsd(arr):
     l = len(arr)
     bucket = [[] for _ in range(10)]
     end = False
@@ -21,7 +21,7 @@ def radix_sort_lds(arr):
         cheng *= 10
 
 
-def radix_sort_lds2(arr):
+def radix_sort_lsd2(arr):
     l = len(arr)
     bucket = [0] * 10
     temp = [0] * l
@@ -49,8 +49,8 @@ def radix_sort_lds2(arr):
 
 def main():
     arr = [302, 2, 198, 32, 48]
-    # radix_sort_lds(arr)
-    radix_sort_lds2(arr)
+    # radix_sort_lsd(arr)
+    radix_sort_lsd2(arr)
     print arr
 
 

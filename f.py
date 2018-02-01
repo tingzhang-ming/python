@@ -22,5 +22,15 @@ def t3():
     print 235345 & 0x7fffffff
 
 
+def t4():
+    a = 1
+    b = 22222
+    b = a^b
+    a = a^b
+    b = a^b
+    print a
+    print b
+
+
 if __name__ == '__main__':
-    t3()
+    t4()
