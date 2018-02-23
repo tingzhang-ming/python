@@ -32,5 +32,51 @@ def t4():
     print b
 
 
+def get_value(s):
+    tmp = dict(
+        a='1',
+        b='2',
+        c='3',
+        d='4',
+        e='5',
+        f='6',
+        g='7',
+        h='8',
+        i='9',
+        j='10',
+        k='11',
+        l='12',
+        m='13',
+        n='14',
+        o='15',
+        p='16',
+        q='17',
+        r='18',
+        s='19',
+        t='20',
+        u='21',
+        v='22',
+        w='23',
+        x='24',
+        y='25',
+        z='26',
+    )
+    res = ''
+    for ss in s:
+        try:
+            int(ss)
+        except ValueError:
+            res += tmp[ss]
+        else:
+            res += ss
+    return int(res)
+
+
+def t5():
+    a = str("n4wlk")[:4]
+    print a
+    print get_value(a)
+
+
 if __name__ == '__main__':
-    t4()
+    t5()
