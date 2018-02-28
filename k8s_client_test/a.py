@@ -2,7 +2,8 @@
 import sys
 from kubernetes import client, config
 
-config.load_kube_config(config_file="/root/test/k8s/client_ssl/kubeconfig")
+#  config.load_kube_config(config_file="/root/test/k8s/client_ssl/kubeconfig")
+config.load_kube_config(config_file="/root/.kube/config3")
 
 v1 = client.CoreV1Api()
 

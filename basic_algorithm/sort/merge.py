@@ -18,7 +18,7 @@ def merge(l, left, mid, right, tmp):
     i = left
     j = mid + 1
     t = left
-    while i <= mid and j <=right:
+    while i <= mid and j <= right:
         if l[i] < l[j]:
             tmp[t] = l[i]
             i += 1
