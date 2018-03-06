@@ -46,4 +46,4 @@ class Valid3(object):
 
 
 if __name__ == '__main__':
-    v = Valid3()
+    v = Valid()

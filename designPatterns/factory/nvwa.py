@@ -1,5 +1,6 @@
 from factory.HumanFactory import HumanFactory
 
+
 def main():
     yin_yang_lu = HumanFactory()
     white_human = yin_yang_lu.create_human("WhiteHuman")

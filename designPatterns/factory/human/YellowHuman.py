@@ -1,5 +1,6 @@
 from human import Human
 
+
 class YellowHuman(Human):
 
     def get_color(self):
