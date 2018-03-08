@@ -1,5 +1,6 @@
 from human import Human
 
+
 class WhiteHuman(Human):
 
     def get_color(self):
@@ -7,3 +8,15 @@ class WhiteHuman(Human):
 
     def talk(self):
         print "white human talk..."
+
+
+class MaleWhiteHuman(WhiteHuman):
+
+    def get_sex(self):
+        print "White male...."
+
+
+class FemaleWhiteHuman(WhiteHuman):
+
+    def get_sex(self):
+        print "White female...."

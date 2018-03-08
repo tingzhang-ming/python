@@ -1,23 +1,16 @@
 
-def t():
-    return "haha"
-
-
 class Meta(type):
     def __new__(cls, name, bases, dct):
         print("calling Meta's __new__", cls)
         return super(Meta, cls).__new__(cls, name, bases, dct)
 
-    def __init__(cls, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         print "Meta __init__"
-        super(Meta, cls).__init__(*args, **kwargs)
+        super(Meta, self).__init__(*args, **kwargs)
 
-    def __call__(cls, *args, **kwargs):
-        print("calling Meta's __call__", cls)
-        # i = cls.__new__(cls)
-        # i.__init__(*args, **kwargs)
-        # return i
-        return ""
+    def __call__(self, *args, **kwargs):
+        print("calling Meta's __call__", self)
+        return super(Meta, self).__call__(*args, **kwargs)
 
 
 class A(object):
@@ -25,10 +18,11 @@ class A(object):
 
     def __new__(cls, *args, **kwargs):
         print("calling A's __new__")
-        return object.__new__(cls)
+        return super(A, cls).__new__(cls)
 
     def __init__(self, *args, **kwargs):
         print("calling A's __init__")
+
 
 
 if __name__ == '__main__':
@@ -36,5 +30,6 @@ if __name__ == '__main__':
 
 
 # ("calling Meta's __new__", <class '__main__.Meta'>)
-# Meta __init__
 # ("calling Meta's __call__", <class '__main__.A'>)
+# calling A's __new__
+# calling A's __init__

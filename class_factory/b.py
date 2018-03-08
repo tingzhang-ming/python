@@ -22,6 +22,6 @@ def get_credential_class(service):
                 raise ValueError('Keys do not match')
 
             for k, v in kwargs.items():
-                setattr(set, k, v)
+                setattr(self, k, v)
     return Credential
 

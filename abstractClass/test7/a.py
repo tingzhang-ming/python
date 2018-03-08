@@ -5,7 +5,6 @@ class Animal(object):
         self.name2 = "hahah"
 
 
-
 class Dog(Animal):
     def __init__(self, name):
         super(Dog, self).__init__(name)

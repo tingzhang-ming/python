@@ -34,7 +34,7 @@ class Fab(object):
             self.a, self.b = self.b, self.a + self.b
             self.n = self.n + 1
             return r
-        raise StopIteration()
+        raise StopIteration
 
 
 def t3():
