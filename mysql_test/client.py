@@ -68,13 +68,13 @@ class MySQL(object):
                 sock = '/var/run/mysqld/mysqld.sock'
                 return mysqlconn.connect(
                                          # unix_socket=sock,
-                                         host='localhost',
+                                         host='10.254.35.205',
                                          user=user,
                                          password=password,
                                          database=database,
                                          charset='utf8',
                                          connection_timeout=timeout,
-                                         port=32935)
+                                         port=3306)
             except MySQLError as ex:
                 timeout = timeout - 1
                 if timeout == 0:
@@ -218,5 +218,11 @@ def t2():
     print result[0]['Value']
 
 
+def t3():
+    c = MySQL()
+    to_time = "{} 00:00:00".format(time.strftime("%Y-%m-%d", time.localtime()))
+    c.execute(sql="purge master logs before'%s'" % to_time)
+
+
 if __name__ == '__main__':
-    t2()
+    t3()

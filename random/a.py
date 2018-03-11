@@ -12,6 +12,11 @@ def t2():
     # 64  包含100
 
 
+def t22():
+    for i in range(5):
+        print random.randint(1, 100)
+
+
 def t3():
     # 输出 100 <= number < 1000 间的偶数
     print "randrange(100, 1000, 2) : ", random.randrange(100, 1000, 2)
@@ -29,4 +34,4 @@ def t4():
 
 
 if __name__ == '__main__':
-    t4()
+    t22()
