@@ -9,10 +9,10 @@ os.environ['https_proxy'] = '109.105.4.17:8119'
 os.environ['LOG_LEVEL'] = 'DEBUG'
 
 s3 = boto3.resource('s3',
-                    endpoint_url='http://109.105.4.65:9001',
+                    # endpoint_url='http://109.105.4.65:9001',
                     region_name='us-east-1',
-                    aws_access_key_id=' IW89KKUNNXT1LGSS6GLB',
-                    aws_secret_access_key='3xCkdgO3TDjeFVfr7kFHMCRoip0BDzmnVxIeeMyv')
+                    aws_access_key_id='',
+                    aws_secret_access_key='')
 
 # ValueError: Invalid endpoint: https://s3.region=us-east-1.amazonaws.com
 
@@ -58,7 +58,7 @@ def delete_all():
         print f
     print "========================="
 
-delete_all()
+# delete_all()
 
 
 def list_files(path):
@@ -88,8 +88,7 @@ def list_directory(path='test/backups'):
     return [{"name": k, "size": v} for k, v in directories.items()]
 
 
-
-# print list_directory()
+print list_directory()
 
 
 def t21():
