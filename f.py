@@ -78,5 +78,9 @@ def t5():
     print get_value(a)
 
 
+def t6():
+    print 5 * 1024 * 1024
+    print 200 * 1024 * 1024
+
 if __name__ == '__main__':
-    t5()
+    t6()

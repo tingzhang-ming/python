@@ -72,7 +72,7 @@ def list_files(path):
     return files
 
 
-def list_directory(path='test/backups'):
+def list_directory(path='test'):
     client = s3.Bucket('dbelt')
     directories = {}
     all_obs = client.objects.all()
@@ -88,8 +88,16 @@ def list_directory(path='test/backups'):
     return [{"name": k, "size": v} for k, v in directories.items()]
 
 
-print list_directory()
+def list_all():
+    client = s3.Bucket('dbelt')
+    directories = {}
+    all_obs = client.objects.all()
+    for ob in all_obs:
+        print ob.key
 
+# for i in list_directory():
+#     print i
+list_all()
 
 def t21():
     ob = s3.Bucket('dbelt').Object('mhc/test.txt')

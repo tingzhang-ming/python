@@ -30,8 +30,8 @@ def env(key, default, environ=os.environ, fn=None):
     return val
 
 
-CHUNK_SIZE = env('CHUNK_SIZE', 2 ** 16, fn=int)
-MAX_FILE_SIZE = env('MAX_FILE_SIZE', 5 * 1024 * 1024, fn=int)
+CHUNK_SIZE = env('CHUNK_SIZE', 5 * 1024 * 1024, fn=int)
+MAX_FILE_SIZE = env('MAX_FILE_SIZE', 200 * 1024 * 1024, fn=int)
 
 
 class ReadableToIterable(object):
