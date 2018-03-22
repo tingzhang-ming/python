@@ -3,8 +3,8 @@ import re
 import boto3
 import botocore.exceptions
 
-# os.environ['http_proxy'] = '109.105.4.17:8119'
-os.environ['https_proxy'] = '109.105.4.17:8119'
+os.environ['http_proxy'] = '109.105.4.17:8119'
+# os.environ['https_proxy'] = '109.105.4.17:8118'
 
 os.environ['LOG_LEVEL'] = 'DEBUG'
 
@@ -45,17 +45,18 @@ def t2():
 # t2()
 
 def delete_all():
-    path = "test/backups"
+    path = "backups"
     client = s3.Bucket('dbelt')
     files = []
     for obj in client.objects.all():
         patt = '(^%s)/.*[^/]' % path.rstrip('/')
         result = re.search(patt, obj.key)
         if result:
-            files.append(result.group())
+            # files.append(result.group())
+            print result.group()
             client.Object(result.group()).delete()
-    for f in files:
-        print f
+    # for f in files:
+    #     print f
     print "========================="
 
 # delete_all()
@@ -70,6 +71,10 @@ def list_files(path):
         if result:
             files.append(result.group())
     return files
+
+
+for f in list_files("test/backups/rmdb20180316--2018-03-21T01-22-21Z"):
+    print f
 
 
 def list_directory(path='test'):
@@ -97,7 +102,7 @@ def list_all():
 
 # for i in list_directory():
 #     print i
-list_all()
+# list_all()
 
 def t21():
     ob = s3.Bucket('dbelt').Object('mhc/test.txt')
@@ -114,7 +119,7 @@ def t3():
         else:
             raise
 
-t3()
+# t3()
 
 class MockWrite(object):
 
