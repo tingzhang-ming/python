@@ -3,8 +3,8 @@ import re
 import boto3
 import botocore.exceptions
 
-os.environ['http_proxy'] = '109.105.4.17:8119'
-# os.environ['https_proxy'] = '109.105.4.17:8118'
+# os.environ['http_proxy'] = '109.105.4.17:8119'
+os.environ['https_proxy'] = '109.105.4.17:8118'
 
 os.environ['LOG_LEVEL'] = 'DEBUG'
 
@@ -73,7 +73,7 @@ def list_files(path):
     return files
 
 
-for f in list_files("test/backups/rmdb20180316--2018-03-21T01-22-21Z"):
+for f in list_files("test/backups"):
     print f
 
 
