@@ -82,5 +82,18 @@ def t6():
     print 5 * 1024 * 1024
     print 200 * 1024 * 1024
 
+
+import time
+def t7():
+    print time.time()
+
+
+def t8():
+    print 1522059333 - 1522058433
+    a = 900 + 1522059333
+    now = time.time()
+    print a - time.time()
+    print now >= a
+
 if __name__ == '__main__':
-    t6()
+    t8()
