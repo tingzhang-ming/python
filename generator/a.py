@@ -47,6 +47,21 @@ def t3():
     # 5
 
 
+def t31():
+    """ the progress of t3 """
+    f = Fab(5)
+    g = iter(f)
+    while True:
+        try:
+            print(next(f))
+        except StopIteration:
+            break
+# 1
+# 1
+# 2
+# 3
+# 5
+
 def fab2(max_n):
     n, a, b = 0, 0, 1
     while n < max_n:
@@ -87,4 +102,4 @@ def t5():
         print i
 
 if __name__ == '__main__':
-    t5()
+    t31()
