@@ -8,7 +8,7 @@ def t1():
         c='c'
     )
     for k, v in d.items():
-        print k, ': ', v
+        print( k, ': ', v)
 # a :  a
 # c :  c
 # b :  b
@@ -25,7 +25,7 @@ def t2():
         b='b',
         c='c'
     )
-    print d1 == d2
+    print(d1 == d2)
     d3 = OrderedDict(
         a='a',
         b='b',
@@ -36,7 +36,7 @@ def t2():
         b='b',
         c='c'
     )
-    print d3 == d4
+    print(d3 == d4)
 
     d5 = OrderedDict()
     d5['a'] = 'a'
@@ -45,7 +45,7 @@ def t2():
     d6 = OrderedDict()
     d6['a'] = 'a'
     d6['b'] = 'b'
-    print d5 == d6
+    print(d5 == d6)
     # True
     # True
     # True
@@ -58,11 +58,11 @@ def t3():
         c=8
     )
     kd = OrderedDict(d)
-    print kd
+    print(kd)
     kd2 = OrderedDict(sorted(d.items(), key=lambda t: t[0]))
-    print kd2
+    print(kd2)
     kd3 = OrderedDict(sorted(d.items(), key=lambda t: t[1]))
-    print kd3
+    print(kd3)
     # OrderedDict([('a', 2), ('c', 8), ('b', 1)])
     # OrderedDict([('a', 2), ('b', 1), ('c', 8)])
     # OrderedDict([('b', 1), ('a', 2), ('c', 8)])
