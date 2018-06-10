@@ -1,0 +1,122 @@
+---
+swagger: "2.0"
+info:
+  description: "description."
+  version: "1.0.0"
+  title: "Swagger Test"
+  termsOfService: "http://swagger.io/terms/"
+basePath: "/book"
+tags:
+- name: "book"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /insert:
+    post:
+      tags:
+      - "book"
+      summary: "Add a new book to the store"
+      description: ""
+      operationId: "add_book"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "book"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.book_controller"
+  /list:
+    get:
+      tags:
+      - "book"
+      summary: "Finds Book by status"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "find_book_by_status"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "state"
+        in: "query"
+        description: "Status values that need to be considered for filter"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          default: ""
+          enum:
+          - "active"
+          - "dead"
+          - "sold"
+        collectionFormat: "multi"
+      responses:
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "swagger_server.controllers.book_controller"
+  /delete:
+    post:
+      tags:
+      - "book"
+      summary: "Add a new book to the store"
+      description: ""
+      operationId: "delete_book"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "book"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.book_controller"
+definitions:
+  Book:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "doggie"
+      author:
+        type: "string"
+        example: "mhc"
+      press:
+        type: "string"
+        example: "bala"
+      state:
+        type: "string"
+        description: "book status in the store"
+        enum:
+        - "active"
+        - "dead"
+        - "sold"
+    example:
+      author: "mhc"
+      name: "doggie"
+      state: "active"
+      press: "bala"
+    xml:
+      name: "Book"
