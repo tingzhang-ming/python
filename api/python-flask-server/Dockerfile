@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM registry.bst-1.cns.bstjpc.com:5000/python:3-alpine
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
