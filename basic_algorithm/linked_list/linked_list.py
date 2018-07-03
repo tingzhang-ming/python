@@ -34,6 +34,7 @@ def add(head, node):
         p = p.next
     q.next = node
     node.next = None
+    return node
 
 
 def add_index(head, index, node):
