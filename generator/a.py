@@ -1,7 +1,7 @@
 
 def t1():
-    for i in xrange(10):
-        print i
+    for i in range(10):
+        print(i)
 
 
 def fab(max_n):
@@ -15,7 +15,7 @@ def fab(max_n):
 
 
 def t2():
-    print fab(5)
+    print(fab(5))
     # [1, 1, 2, 3, 5]
 
 
@@ -39,7 +39,7 @@ class Fab(object):
 
 def t3():
     for n in Fab(5):
-        print n
+        print(n)
     # 1
     # 1
     # 2
@@ -72,7 +72,7 @@ def fab2(max_n):
 
 def t4():
     for i in fab2(5):
-        print i
+        print(i)
     # 1
     # 1
     # 2
@@ -99,7 +99,7 @@ def test():
 
 def t5():
     for i in test():
-        print i
+        print(i)
 
 if __name__ == '__main__':
     t31()

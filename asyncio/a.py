@@ -43,7 +43,8 @@ def nested(*args):
 @asyncio.coroutine
 def outer(*args):
     print('The `outer` function ran with args: %r' % (args,))
-    answer = yield from nested(*[i * 2 for i in args])
+    answer = yield from nested(*[i * 2 for i in args])    # 异步调用， 执行时间较长的io
+    print(answer)
     return answer
 
 
@@ -74,6 +75,16 @@ True
 """
 
 
+def t41():
+    task = asyncio.ensure_future(make_tea('chamomile'))
+    task2 = asyncio.ensure_future(make_tea('chamomile22222'))
+    print(task.done())
+    loop = asyncio.get_event_loop()
+    loop.run_forever()
+    print(task.done())
+    print(task2.done())
+
+
 @asyncio.coroutine
 def make_tea(variety):
     print('Now making %s tea.' % variety)
@@ -100,4 +111,4 @@ True
 
 
 if __name__ == '__main__':
-    t5()
+    t31()

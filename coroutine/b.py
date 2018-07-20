@@ -8,8 +8,9 @@ def follow(thefile, target):
     while True:
         line = thefile.readline()
         if not line:
-            time.sleep(0.1)
+            time.sleep(1)
             continue
+        print "get"
         target.send(line)
 
 
