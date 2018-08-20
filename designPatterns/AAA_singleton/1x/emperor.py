@@ -6,7 +6,7 @@ class Emperor(object):
         self.name = None
 
     def say(self):
-        print "my name: %s" % self.name
+        print("my name: %s" % self.name)
 
 _emperor = Emperor()
 

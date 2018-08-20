@@ -7,7 +7,7 @@ class Emperor2(object):
     _instance = None
 
     def __new__(cls, *args, **kwargs):
-        print cls._instance is None
+        print( cls._instance is None)
         if cls._instance:
             return cls._instance
         cls._instance = object.__new__(cls)
@@ -17,7 +17,7 @@ class Emperor2(object):
         self.name = None
 
     def say(self):
-        print "my name: %s" % self.name
+        print("my name: %s" % self.name)
 
 
 class Singleton(type):
@@ -43,4 +43,4 @@ class Emperor(object):
         self.name = None
 
     def say(self):
-        print "my name: %s" % self.name
+        print("my name: %s" % self.name)

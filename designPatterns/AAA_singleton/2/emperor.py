@@ -29,9 +29,9 @@ class Emperor(object):
     __metaclass__ = Singleton2
 
     def __init__(self):
-        print 'emperor __init__'
+        print('emperor __init__')
         self.name = None
 
     def say(self):
-        print "my name: %s" % self.name
+        print("my name: %s" % self.name)
 
