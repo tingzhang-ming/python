@@ -95,5 +95,10 @@ def t8():
     print a - time.time()
     print now >= a
 
+
+def t9():
+    print 123 / 1000 % 10
+
+
 if __name__ == '__main__':
-    t8()
+    t9()
