@@ -75,5 +75,33 @@ def t8():
     location = "/backup/location/123"
     print _explodeLocation(location)
 
+
+def t9():
+    dp = [False] * 5
+    print dp
+    for j in range(5):
+        print dp[j]
+
+
+def t10():
+    l_s = 4
+    dp = [[False] * l_s] * l_s
+    for i in dp:
+        print i
+    dp[0][0] = True
+    for i in dp:
+        print i
+
+
+def t11():
+    l_s = 4
+    dp = [[False] * l_s for _ in range(l_s)]
+    for i in dp:
+        print i
+    dp[0][0] = True
+    for i in dp:
+        print i
+
+
 if __name__ == '__main__':
-    t8()
+    t11()
