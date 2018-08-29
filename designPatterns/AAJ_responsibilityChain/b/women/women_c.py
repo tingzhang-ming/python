@@ -1,5 +1,6 @@
+from handler import LEVELS
+
 from women import AbstractWomen
-from handler import  LEVELS
 
 
 class Women(AbstractWomen):

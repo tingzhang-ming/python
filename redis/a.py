@@ -1,7 +1,7 @@
 import redis
 
 if __name__ == "__main__":
-    r = redis.StrictRedis(host="localhost", port=6379, db=0)
+    r = redis.StrictRedis(host="109.105.1.254", port=18502, db=0)
     r.set("mhc","sdfdf")
     print r.get("mhc")
     #sdfdf
