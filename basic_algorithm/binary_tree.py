@@ -46,8 +46,7 @@ def in_order(root):
     return res
 
 
-def post_order(root):
-    p = root
+def post_order(p):
     stack = []
     flag_stack = []
     res = []
@@ -56,17 +55,56 @@ def post_order(root):
             stack.append(p)
             flag_stack.append(False)
             p = p.lnode
-        while 1:
-            if len(stack) > 0 and flag_stack[-1] == True:
-                v = stack.pop()
-                flag_stack.pop()
-                res.append(v.data)
-            else:
-                break
+        while len(stack) > 0 and flag_stack[-1] is True:
+            v = stack.pop()
+            flag_stack.pop()
+            res.append(v.data)
         if len(stack) > 0:
             p = stack[-1].rnode
             flag_stack[-1] = True
     return res
+
+
+def pre_order2(root):
+    res = []
+    pre_dfs(root, res)
+    return res
+
+
+def pre_dfs(p, res):
+    res.append(p.data)
+    if p.lnode:
+        pre_dfs(p.lnode, res)
+    if p.rnode:
+        pre_dfs(p.rnode, res)
+
+
+def in_order2(root):
+    res = []
+    in_dfs(root, res)
+    return res
+
+
+def in_dfs(p, res):
+    if p.lnode:
+        in_dfs(p.lnode, res)
+    res.append(p.data)
+    if p.rnode:
+        in_dfs(p.rnode, res)
+
+
+def post_order2(root):
+    res = []
+    post_dfs(root, res)
+    return res
+
+
+def post_dfs(p, res):
+    if p.lnode:
+        post_dfs(p.lnode, res)
+    if p.rnode:
+        post_dfs(p.rnode, res)
+    res.append(p.data)
 
 
 if __name__ == '__main__':
@@ -74,6 +112,6 @@ if __name__ == '__main__':
     add(bt, 2, 3)
     add(bt.lnode, 4, 5)
     add(bt.rnode, 6, 7)
-    print pre_order(bt)
-    print in_order(bt)
-    print post_order(bt)
+    print(pre_order2(bt))
+    print(in_order2(bt))
+    print(post_order2(bt))

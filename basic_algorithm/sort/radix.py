@@ -13,6 +13,7 @@ def radix_sort_lsd(arr):
             if wei > 0 and end is True:
                 # 这一位不是0, 继续计算
                 end = False
+            wei = int(wei)
             bucket[wei].append(arr[i])
         del arr[:]
         for bi in bucket:
@@ -34,6 +35,7 @@ def radix_sort_lsd2(arr):
             if wei > 0 and end is True:
                 # 这一位不是0, 继续计算
                 end = False
+            wei = int(wei)
             bucket[wei] += 1
         for j in range(1, 10):
             bucket[j] += bucket[j-1]
@@ -48,10 +50,10 @@ def radix_sort_lsd2(arr):
 
 
 def main():
-    arr = [302, 2, 198, 32, 48]
+    arr = [302, 20, 198, 32, 48]
     # radix_sort_lsd(arr)
-    radix_sort_lsd2(arr)
-    print arr
+    radix_sort_lsd(arr)
+    print(arr)
 
 
 if __name__ == '__main__':
