@@ -28,5 +28,6 @@ def reverse1():
     l.next = pre
     print(string(l))
 
+
 if __name__ == '__main__':
     reverse1()
