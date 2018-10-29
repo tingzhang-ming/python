@@ -29,7 +29,7 @@ def quick_sort2(arr, _left, _right):
         arr[random_index] = tmp
         while left != right:
             tmp = arr[left]
-            print tmp
+            print(tmp)
             while left < right and arr[right] >= tmp:
                 right -= 1
             arr[left] = arr[right]
@@ -44,7 +44,7 @@ def quick_sort2(arr, _left, _right):
 def main():
     arr = [5, 10, 3, 1, 7, 2, 8]
     quick_sort(arr, 0, len(arr)-1)
-    print arr
+    print(arr)
 
 
 if __name__ == '__main__':
