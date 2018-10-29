@@ -16,4 +16,4 @@ def number_to_aaa(number):
 
 
 if __name__ == '__main__':
-    print(number_to_aaa(841))
+    print(number_to_aaa(60))

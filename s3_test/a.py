@@ -3,14 +3,14 @@ import re
 import boto3
 import botocore.exceptions
 
-# os.environ['http_proxy'] = '109.105.4.17:8119'
-os.environ['https_proxy'] = '109.105.4.17:8118'
+os.environ['http_proxy'] = '109.105.4.17:8119'
+os.environ['https_proxy'] = '109.105.4.17:8119'
 
 os.environ['LOG_LEVEL'] = 'DEBUG'
 
 s3 = boto3.resource('s3',
-                    # endpoint_url='http://109.105.4.65:9001',
-                    region_name='us-east-1',
+                    endpoint_url='http://s3.ap-northeast-1.amazonaws.com',
+                    region_name='ap-northeast-1',
                     aws_access_key_id='',
                     aws_secret_access_key='')
 
@@ -72,9 +72,9 @@ def list_files(path):
             files.append(result.group())
     return files
 
-
-for f in list_files("test/backups"):
-    print f
+#
+# for f in list_files("test/backups"):
+#     print f
 
 
 def list_directory(path='test'):
