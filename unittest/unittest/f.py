@@ -1,4 +1,4 @@
-import unittest
+import unittest.unittest.unittest
 from mock import MagicMock
 
 m = MagicMock()

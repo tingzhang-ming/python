@@ -1,5 +1,5 @@
 import mock
-import unittest
+import unittest.unittest.unittest
 
 class Count():
 
@@ -7,7 +7,7 @@ class Count():
         pass
 
 # test Count class
-class TestCount(unittest.TestCase):
+class TestCount(unittest.unittest.TestCase):
 
     def test_add(self):
         count = Count()
@@ -17,7 +17,7 @@ class TestCount(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.unittest.main()
 
 """
 .

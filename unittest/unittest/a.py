@@ -1,8 +1,8 @@
-import unittest
+import unittest.unittest.unittest
 import random
 
 
-class Test(unittest.TestCase):
+class Test(unittest.unittest.TestCase):
 
     def setUp(self):
         self.seq = range(10)
@@ -25,7 +25,7 @@ class Test(unittest.TestCase):
         self.assertTrue(element not in self.seq)
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.unittest.main()
 
 """
 

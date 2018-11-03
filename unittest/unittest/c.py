@@ -1,13 +1,13 @@
 #encoding: utf-8
 import mock
-import unittest
+import unittest.unittest.unittest
 
 class Count():
 
     def add(self, a, b):
         return a + b
 
-class MockDemo(unittest.TestCase):
+class MockDemo(unittest.unittest.TestCase):
 
     def test_add(self):
         count = Count()
@@ -18,7 +18,7 @@ class MockDemo(unittest.TestCase):
         self.assertEqual(result, 16)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.unittest.main()
 
 """
 16

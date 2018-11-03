@@ -1,8 +1,8 @@
-import unittest
+import unittest.unittest.unittest
 from mock import patch
 import d_fun
 
-class MyTestCase(unittest.TestCase):
+class MyTestCase(unittest.unittest.TestCase):
 
     @patch("d_fun.multiply")
     def test_add_and_multiply2(self, mock_multiply):
@@ -17,7 +17,7 @@ class MyTestCase(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.unittest.main()
 
 """
 Ran 1 test in 0.001s
