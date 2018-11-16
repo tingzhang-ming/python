@@ -15,7 +15,7 @@ def config():
 
 
 def t1():
-    db_api.db_sync(options, version=2)
+    db_api.db_sync(options, version=3)
 
 
 def t2():

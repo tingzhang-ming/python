@@ -14,7 +14,9 @@ def map(engine):
 
     tables = {
         "test1": test1.DBTestTable1,
-        "test2": test1.DBTestTable2
+        "test2": test1.DBTestTable2,
+        "configurations": test1.DBConfiguration,
+        "configuration_parameters": test1.DBConfigurationParameter
     }
 
     for table_name, data_model in tables.items():
