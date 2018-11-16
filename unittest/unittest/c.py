@@ -1,24 +1,27 @@
 #encoding: utf-8
 import mock
-import unittest.unittest.unittest
+import unittest
+
 
 class Count():
 
     def add(self, a, b):
         return a + b
 
-class MockDemo(unittest.unittest.TestCase):
+
+class MockDemo(unittest.TestCase):
 
     def test_add(self):
         count = Count()
         count.add = mock.Mock(side_effect=count.add)
         result = count.add(8, 8)
         print(result)
-        count.add.assert_called_with(8, 8)  #检查mock方法是否获得了正确的参数
+        count.add.assert_called_with(8, 8)  # 检查mock方法是否获得了正确的参数
         self.assertEqual(result, 16)
 
+
 if __name__ == '__main__':
-    unittest.unittest.main()
+    unittest.main()
 
 """
 16

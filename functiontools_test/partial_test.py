@@ -18,5 +18,20 @@ def t2():
     print add2()
     # 3
 
+
+def fun(a, b=1):
+    print a
+    print b
+    return a + b
+
+
+def t3():
+    add3 = partial(fun, b=99)
+    print add3(1)
+# 1
+# 99
+# 100
+
+
 if __name__ == '__main__':
-    t2()
+    t3()

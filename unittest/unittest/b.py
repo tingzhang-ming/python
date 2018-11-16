@@ -1,23 +1,25 @@
 import mock
-import unittest.unittest.unittest
+import unittest
+
 
 class Count():
 
     def add(self):
         pass
 
+
 # test Count class
-class TestCount(unittest.unittest.TestCase):
+class TestCount(unittest.TestCase):
 
     def test_add(self):
         count = Count()
         count.add = mock.Mock(return_value=13)
         result = count.add(8,5)
-        self.assertEqual(result,13)
+        self.assertEqual(result, 13)
 
 
 if __name__ == '__main__':
-    unittest.unittest.main()
+    unittest.main()
 
 """
 .

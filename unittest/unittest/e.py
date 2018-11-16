@@ -1,9 +1,10 @@
-import unittest.unittest.unittest
+import unittest
 from mock import MagicMock
 
 import e_class
 
-class MyTest(unittest.unittest.TestCase):
+
+class MyTest(unittest.TestCase):
 
     def test_should_mock_get_10_times_value_with_MagicMock(self):
         p = e_class.Person()

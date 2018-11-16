@@ -1,6 +1,6 @@
 # encoding: utf-8
 import os
-from mockito import when, mock, unstub, any
+from mockito import when, mock, unstub, any, verify
 
 
 def t1():
@@ -24,7 +24,23 @@ def t2():
 # Ok
 
 
+class Manager(object):
+
+    def add_tasks(self, a, b, c):
+        pass
+
+
+# must use 'when' first
+def t3():
+    manager = Manager()
+    when(manager).add_tasks(any(), any(), any())
+    manager.add_tasks(1, 2, 4)
+    verify(manager).add_tasks(1, 2, 3)
+# Wanted but not invoked:  add_tasks(1, 2, 3)
+# Instead got:             [add_tasks(1, 2, 4)]
+
+
 if __name__ == '__main__':
-    t2()
+    t3()
     # clean up
     unstub()
