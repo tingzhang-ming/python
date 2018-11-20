@@ -1,0 +1,2 @@
+{% for file in filenames %}file name is {{ file }}
+{% endfor %}

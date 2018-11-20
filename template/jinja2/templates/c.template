@@ -1,0 +1,17 @@
+{{ 'abc' | capitalize   }}
+# Abc
+
+{{ 'abc' | upper  }}
+# ABC
+
+{{ 'hello world' | title  }}
+# Hello World
+
+{{ "hello world" | replace('world','daxin') | upper }}
+# HELLO DAXIN
+
+{{ 18.18 | round | int }}
+# 18
+
+<p>{{ [1,2,3,4,5] | join(' | ') }}</p>
+# <p>1 | 2 | 3 | 4 | 5</p>

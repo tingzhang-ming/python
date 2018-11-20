@@ -85,12 +85,12 @@ def t7():
         DBTestTable1.name == "name1",
         DBTestTable1.description == "description1"
     ]
-    test1 = DBTestTable1.find_by_filter(filters=filters)  # just one
+    test1 = DBTestTable1.find_by_filter(filters=filters)
     print test1.count()
 
-    test2 = DBTestTable1.find_by_filter(filters=filters, id="e33d0153-ec85-4731-bc87-73f818017dbd")  # just one
+    test2 = DBTestTable1.find_by_filter(filters=filters, id="e33d0153-ec85-4731-bc87-73f818017dbd")
     print test2.count()
-# 1
+# 2
 # 1
 
 
@@ -108,4 +108,4 @@ def t8():
 
 
 if __name__ == '__main__':
-    t1()
+    t6()

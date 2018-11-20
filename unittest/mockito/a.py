@@ -1,6 +1,6 @@
 # encoding: utf-8
 import os
-from mockito import when, mock, unstub, any, verify
+from mockito import when, mock, unstub, any, verify, times
 
 
 def t1():
@@ -40,7 +40,15 @@ def t3():
 # Instead got:             [add_tasks(1, 2, 4)]
 
 
+def t4():
+    manager = Manager()
+    when(manager).add_tasks(any(), any(), any())
+    manager.add_tasks(1, 2, 4)
+    verify(manager).add_tasks(1, 2, 4)
+    verify(manager, times(1)).add_tasks(any(), any(), any())
+
+
 if __name__ == '__main__':
-    t3()
+    t4()
     # clean up
     unstub()

@@ -1,0 +1,8 @@
+{% macro input(name,age=18) %}
+
+ <input type='text' name="{{ name }}" value="{{ age }}" >
+
+{% endmacro %}
+
+<p>{{ input('daxin') }} </p>
+<p>{{ input('daxin',age=20) }} </p>

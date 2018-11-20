@@ -1,0 +1,7 @@
+{% if daxin.safe %}
+daxin is safe.
+{% elif daxin.dead %}
+daxin is dead
+{% else %}
+daxin is okay
+{% endif %}

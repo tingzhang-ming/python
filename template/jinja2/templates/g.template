@@ -1,0 +1,3 @@
+{% from 'f.template' import input %}
+
+<p>{{ input('mhc',age=99) }} </p>
