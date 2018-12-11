@@ -32,6 +32,7 @@ if __name__ == '__main__':
     p.login("user", "name")
     p.kill_boss()
     p.upgrade()
+    p.login("user2", "name2")
 
 # someone login my account
 # login user: user, password: name

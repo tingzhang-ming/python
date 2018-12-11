@@ -42,6 +42,7 @@ def main():
     def actions(subparser):
         parser = subparser.add_parser('test1',
                                       help='Populate the database structure')
+        parser.set_defaults(haha="lala")
         parser.add_argument('--t_a',
                             help='SQLAlchemy Migrate repository path')
 
@@ -54,7 +55,7 @@ def main():
 
     custom_parser('action', actions)
     parse_args(sys.argv)
-
+    print(CONF.action.haha)
     try:
         Commands().execute()
         sys.exit(0)
