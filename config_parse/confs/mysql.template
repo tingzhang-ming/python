@@ -1,0 +1,111 @@
+[client]
+port            = 3306
+socket          = /var/lib/mysql/mysql.sock
+
+[mysqld_safe]
+nice = 0
+
+[mysqld]
+user            = mysql
+port            = 3306
+socket          = /var/lib/mysql/mysql.sock
+basedir         = /usr/local/mysql
+datadir         = /rds/mysql
+tmpdir          = /rds/tmp/
+pid-file        = /rds/mysql/mysql.pid
+log_error       = /rds/logs/mysql/mysqld-err.log
+log-bin 		= /rds/logs/mysql/binlogs/binlog
+relay-log		= /rds/logs/mysql/relays/relay
+
+# init file
+init-file=/rds/_init_.sql
+
+# slow options
+slow_query_log
+long_query_time = 1
+slow_query_log_file = /rds/logs/mysql/mysqld-slow.log
+
+skip-name-resolve
+skip-external-locking
+
+key_buffer_size = {{ 50 * flavor['ram']//512 }}M
+max_allowed_packet = 128M
+thread_stack = 192K
+thread_cache_size = {{ 2 * flavor['ram']//512 }}
+myisam-recover = BACKUP
+
+query_cache_limit = 1M
+query_cache_type = OFF
+query_cache_size = 0
+
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_buffer_pool_size = {% if flavor['ram'] // 512 > 4 %} {{ (0.6 * flavor['ram'] * 1024 * 1024)|round|int }} {% elif flavor['ram'] // 512 > 2 %} {{ (0.4 * flavor['ram'] * 1024 * 1024)|round|int }} {% else %} {{ (0.25 * flavor['ram'] * 1024 * 1024)|round|int }} {% endif %}
+innodb_file_per_table = 1
+innodb_log_files_in_group = 2
+innodb_log_buffer_size = 32M
+innodb_io_capacity = 2000
+innodb_log_file_size = 128M
+innodb_flush_log_at_trx_commit = 1
+innodb_flush_method = O_DIRECT
+innodb_read_io_threads = 8
+innodb_write_io_threads = 8
+innodb_purge_threads = 1
+
+#1:sync 2:libaio
+connect_timeout = 15
+wait_timeout = 1200
+interactive_timeout = 1200
+lock_wait_timeout = 1200
+
+binlog_cache_size = 512K
+join_buffer_size = 1M
+read_buffer_size = 512K
+read_rnd_buffer_size = 512K
+sort_buffer_size = 1M
+tmp_table_size = {{ (0.005 * flavor['ram'] * 1024 * 1024)|round|int }}
+max_heap_table_size = {{ 2 * flavor['ram']//512 }}M
+table_definition_cache = {% if 64 * flavor['ram']//512 > 1024 %} 2048  {% else %} {{ 64 * flavor['ram']//512 }} {% endif %}
+open_files_limit = {% if 200 * flavor['ram']//512 > 10240 %} 10240 {% else %} {{ 200 * flavor['ram']//512  }} {% endif %}
+max_user_connections = {{ 100 * flavor['ram']//512 }}
+max_connections = {{ 100 * flavor['ram']//512 + 10 }}
+default_storage_engine = innodb
+local-infile = 0
+server_id = {{server_id}}
+
+back_log = 1024
+
+rpl_semi_sync_master_enabled = ON
+rpl_semi_sync_slave_enabled = ON
+rpl_semi_sync_master_timeout = 1000
+
+expire_logs_days = 1
+binlog_format = mixed
+max_binlog_size = 128M
+max_relay_log_size = 256M
+relay_log_purge = 1
+
+log_warnings = 2
+read_only = OFF
+slave-net-timeout = 60
+master-retry-count = 0
+
+#sync
+sync_master_info    = 0
+sync_binlog         = 1
+sync_relay_log      = 0
+sync_relay_log_info = 0
+
+#event
+event-scheduler     = OFF
+log_slave_updates = ON
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet = 16M
+
+[isamchk]
+key_buffer = 16M
+
+
+!includedir /etc/mysql/conf.d/

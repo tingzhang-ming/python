@@ -27,6 +27,16 @@ class Commands(object):
         print "test2 -----"
         print "t_b: %s, t_c: %s" % (t_b, t_c)
 
+    def test3(self, t_d):
+        print "test3 -----"
+        print "t_a: %s" % t_d
+
+    def config(self, config_id, value_file, config_name=None, description=None):
+        print config_id
+        print value_file
+        print config_name
+        print description
+
     def execute(self):
         exec_method = getattr(self, CONF.action.name)
         args = inspect.getargspec(exec_method)
@@ -52,6 +62,16 @@ def main():
         parser.add_argument('--t_c',
                             help='SQLAlchemy Migrate repository path')
 
+        parser = subparser.add_parser('test3',
+                                      help='Populate the database structure')
+        parser.add_argument('t_d',
+                            help='SQLAlchemy Migrate repository path')
+
+        parser = subparser.add_parser("config")
+        parser.add_argument('config_id')
+        parser.add_argument('value_file', help='the config file path')
+        parser.add_argument('--config_name', help='the config of name')
+        parser.add_argument('--description', help='the config of desc')
     custom_parser('action', actions)
     parse_args(sys.argv)
 

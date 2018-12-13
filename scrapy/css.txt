@@ -1,0 +1,65 @@
+>>> response.css('title')
+[<Selector xpath=u'descendant-or-self::title' data=u'<title>Quotes to Scrape</title>'>]
+>>> response.css('title').extract()
+[u'<title>Quotes to Scrape</title>']
+>>> response.css('title::text').extract()
+[u'Quotes to Scrape']
+
+>>> response.css('title::text').extract_first()
+u'Quotes to Scrape'
+>>> response.css('title::text')[0].extract()
+u'Quotes to Scrape'
+
+>>> response.css('title::text').re(r'Quotes.*')
+[u'Quotes to Scrape']
+>>> response.css('title::text').re(r'(\w+) to (\w+)')
+[u'Quotes', u'Scrape']
+>>> response.css('title::text').re(r'Q\w+')
+[u'Quotes']
+
+>>> response.xpath('//title')
+[<Selector xpath='//title' data='<title>Quotes to Scrape</title>'>]
+>>> response.xpath('//title/text()').extract_first()
+'Quotes to Scrape'
+
+----------------------------------------------------------------------------
+<div class="quote">
+    <span class="text">“The world as we have created it is a process of our
+    thinking. It cannot be changed without changing our thinking.”</span>
+    <span>
+        by <small class="author">Albert Einstein</small>
+        <a href="/author/Albert-Einstein">(about)</a>
+    </span>
+    <div class="tags">
+        Tags:
+        <a class="tag" href="/tag/change/page/1/">change</a>
+        <a class="tag" href="/tag/deep-thoughts/page/1/">deep-thoughts</a>
+        <a class="tag" href="/tag/thinking/page/1/">thinking</a>
+        <a class="tag" href="/tag/world/page/1/">world</a>
+    </div>
+</div>
+
+>>> quote=response.css("div.quote")[0]
+>>> title=quote.css("span.text::text").extract_first()
+>>> title
+u'\u201cThe world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.\u201d'
+>>> author = quote.css("small.author::text").extract_first()
+>>> author
+u'Albert Einstein'
+>>> tags = quote.css("div.tags a.tag::text").extract()
+>>> tags
+[u'change', u'deep-thoughts', u'thinking', u'world']
+
+>>> response.css("div.quote small.author::text").extract()
+[u'Albert Einstein', u'J.K. Rowling', u'Albert Einstein', u'Jane Austen', u'Marilyn Monroe', u'Albert Einstein', u'Andr\xe9 Gide', u'Thomas A. Edison', u'Eleanor Roosevelt', u'Steve Martin']
+
+
+>>> for quote in response.css("div.quote"):
+...     text = quote.css("span.text::text").extract_first()
+...     author = quote.css("small.author::text").extract_first()
+...     tags = quote.css("div.tags a.tag::text").extract()
+...     print(dict(text=text, author=author, tags=tags))
+{'tags': ['change', 'deep-thoughts', 'thinking', 'world'], 'author': 'Albert Einstein', 'text': '“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”'}
+{'tags': ['abilities', 'choices'], 'author': 'J.K. Rowling', 'text': '“It is our choices, Harry, that show what we truly are, far more than our abilities.”'}
+    ... a few more of these, omitted for brevity
+>>>

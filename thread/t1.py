@@ -1,8 +1,9 @@
-#encoding: utf-8
+# encoding: utf-8
 # 函数运行的时候启动线程, 函数结束的时候关闭线程
 
 import threading
 import time
+
 
 def main(a=0):
     def t(event):

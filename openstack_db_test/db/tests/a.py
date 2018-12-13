@@ -101,6 +101,9 @@ def t8():
     test2 = DBTestTable1.get_by(id="e33d0153-ec85-4731-bc87-73f818017dbe")
     if test2 is None:
         print "not exist"
+    test2 = DBTestTable1.find_by(id="e33d0153-ec85-4731-bc87-73f818017dbe")
+    if test2 is None:
+        print "not exist"
 # {'updated': datetime.datetime(2018, 11, 16, 17, 21, 51), 'description': u'description1',
 # 'created': datetime.datetime(2018, 11, 16, 17, 21, 51), 'deleted': 0L, 'deleted_at': None,
 # 'id': u'e33d0153-ec85-4731-bc87-73f818017dbd', 'name': u'name1'}
@@ -108,4 +111,4 @@ def t8():
 
 
 if __name__ == '__main__':
-    t6()
+    t8()

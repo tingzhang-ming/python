@@ -1,0 +1,1 @@
+db = pymysql.connect("localhost","root","00000000","TESTDB" ,use_unicode=True, charset="utf8")
