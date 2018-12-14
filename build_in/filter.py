@@ -22,5 +22,11 @@ def t2():
 # [1, 7, 9, 17]
 
 
+def t3():
+    areas = ["adfdf", None, None]
+    res = list(filter(lambda x: x is not None, areas))
+    print res
+
+
 if __name__ == '__main__':
-    t1()
+    t3()

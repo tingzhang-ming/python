@@ -1,3 +1,6 @@
 scrapy crawl quotes -o quotes.json
 
 scrapy crawl quotes -o quotes.jl
+
+scrapy genspider tencentPostion "tencent.com"
+scrapy genspider -t crawl tencent2 tencent.com
