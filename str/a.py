@@ -6,5 +6,11 @@ def t1():
 # 1
 
 
+def t2():
+    a = "testdsf"
+    print a.index("/")
+
+
+
 if __name__ == '__main__':
-    t1()
+    t2()

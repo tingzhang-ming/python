@@ -20,22 +20,25 @@ def parse_args(argv, default_config_files=None):
 class Commands(object):
 
     def test1(self, t_a):
-        print "test1 -----"
-        print "t_a: %s" % t_a
+        print("test1 -----")
+        print("t_a: %s" % t_a)
 
     def test2(self, t_b, t_c):
-        print "test2 -----"
-        print "t_b: %s, t_c: %s" % (t_b, t_c)
+        print("test2 -----")
+        print("t_b: %s, t_c: %s" % (t_b, t_c))
 
     def test3(self, t_d):
-        print "test3 -----"
-        print "t_a: %s" % t_d
+        print("test3 -----")
+        print("t_a: %s" % t_d)
+        # python2 b.py test3 sf
+        # test3 - ----
+        # t_a: sf
 
     def config(self, config_id, value_file, config_name=None, description=None):
-        print config_id
-        print value_file
-        print config_name
-        print description
+        print(config_id)
+        print(value_file)
+        print(config_name)
+        print(description)
 
     def execute(self):
         exec_method = getattr(self, CONF.action.name)
@@ -75,7 +78,6 @@ def main():
         parser.add_argument('--description', help='the config of desc')
     custom_parser('action', actions)
     parse_args(sys.argv)
-    print(CONF.action.haha)
     try:
         Commands().execute()
         sys.exit(0)

@@ -24,5 +24,12 @@ def t1():
 # file name is name2
 
 
+def t2():
+    template = env.get_template("a.template")
+    path = "/etc/a/a.txt"
+    with open(path, 'w') as f:
+        template.stream(filenames=["name1", "name2"]).dump(f)
+
+
 if __name__ == '__main__':
-    t1()
+    t2()

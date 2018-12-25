@@ -54,9 +54,37 @@ class Test2(BaseApp):
         print(CONF.command.t_b)
 
 
+class Test3(BaseApp):
+    """This is test3 command"""
+
+    name = "test3"
+
+    @classmethod
+    def add_argument_parser(cls, subparsers):
+        parser = super(Test3, cls).add_argument_parser(subparsers)
+        parser.add_argument(
+            't_d',
+            default='haha3',
+            help='lalal3'
+        )
+
+        parser.add_argument(
+            't_e',
+            default='haha4',
+            help='lalal4'
+        )
+
+    @staticmethod
+    def main():
+        print("test3command")
+        print(CONF.command.t_d)
+        print(CONF.command.t_e)
+
+
 CMDS = [
     Test1,
-    Test2
+    Test2,
+    Test3
 ]
 
 
@@ -114,5 +142,10 @@ test1 command
 python c.py test2 --t_b=34
 test2 command
 34
+
+python2 c.py test3 haha df
+test3command
+haha
+df
 
 """

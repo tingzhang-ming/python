@@ -13,6 +13,8 @@ common_opts = [
                 help='Whether to provision a Cinder volume for datadir.'),
     cfg.ListOpt('admin_roles', default=['admin'],
                 help='Roles to add to an admin user.'),
+    cfg.StrOpt('some', default="$api_paste_config/haha",
+               help='File name for the paste.deploy config for trove-api.'),
 ]
 
 database_opts = [
@@ -74,19 +76,21 @@ def t1():
 
     print CONF.mysql.icmp
     print CONF.mysql.tcp_ports
+    print CONF.some
 
 # python a.py --config-file D:\github\python\cli_test\oslo_config\configs\a.conf
 # python a.py --config-dir D:\github\python\cli_test\oslo_config\configs
-# 1.2.3.4
-# 2222
-# bala
+# 0.0.0.0
+# 8779
+# api-paste.ini
 # True
-# ['aa', 'bb', 'cc']
-# 1.2.3.4
-# mysql://localhost:3306/test
-# 111
+# ['admin']
+# 0.0.0.0
+# mysql+pymysql://rds:Kingsoft@localhost/trove_test
+# 3600
 # False
-# [xrange(3306, 11224)]
+# [xrange(3306, 3305, -1)]
+# api-paste.ini/haha
 
 
 def t2():
@@ -99,5 +103,42 @@ def t2():
     print CONF["bind_port"]
 
 
+def t3():
+    import sys
+    parse_args([], default_config_files=["D:\github\python\cli_test\oslo_config\configs\\a.conf"])
+
+    print CONF.bind_host
+    print CONF.bind_port
+    print CONF.api_paste_config
+    print CONF.trove_volume_support
+    print CONF.admin_roles
+
+    print CONF["bind_host"]
+
+    print CONF.database.connection
+    print CONF.database.idle_timeout
+
+    print CONF.mysql.icmp
+    print CONF.mysql.tcp_ports
+
+
+def t4():
+    from argparse import ArgumentParser
+    parser = ArgumentParser(description="flow util shell.")
+    sub_parser = parser.add_subparsers(dest="action")
+    get_run_parser = sub_parser.add_parser("run")
+    get_run_parser.add_argument("--config_file")
+    args = vars(parser.parse_args())
+    action = args["action"]
+    if action == "run":
+        config_file = args.get("config_file")
+        print config_file
+        cfg.CONF(args=[],
+                 project='trove',
+                 version="1.0",
+                 default_config_files=[config_file])
+    print CONF.bind_host
+
+
 if __name__ == '__main__':
-    t2()
+    t1()
