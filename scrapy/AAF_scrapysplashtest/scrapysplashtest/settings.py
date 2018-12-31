@@ -25,6 +25,11 @@ DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
+KEYWORDS = ['iPad']
+
+MONGO_URI = 'localhost'
+MONGO_DB = 'taobao'
+
 BOT_NAME = 'AAF_scrapysplashtest'
 
 SPIDER_MODULES = ['AAF_scrapysplashtest.spiders']

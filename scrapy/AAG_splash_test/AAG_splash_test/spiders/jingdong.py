@@ -7,7 +7,7 @@ from scrapy_splash import SplashMiddleware
 from scrapy.http import Request, HtmlResponse
 from scrapy.selector import Selector
 from scrapy_splash import SplashRequest
-from AAG_jingdong_mobile.items import AagJingdongMobileItem
+from AAG_splash_test.items import AagJingdongMobileItem
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')

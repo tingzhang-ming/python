@@ -34,3 +34,17 @@ class AagJingdongMobileItem(scrapy.Item):
     # post_comment_count = scrapy.Field()
     # url = scrapy.Field()
 
+
+class SplashTestItem(scrapy.Item):
+    #标题
+    title = scrapy.Field()
+    #日期
+    date = scrapy.Field()
+    #链接
+    url = scrapy.Field()
+    #关键字
+    keyword  = scrapy.Field()
+    #来源网站
+    source =  scrapy.Field()
+
+
