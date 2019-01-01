@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for AAG_jingdong_mobile project
+# Scrapy settings for AAH_login project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,41 +9,9 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-KEYWORDS = ['打通', '融合', '电视']
-
-SPLASH_URL = 'http://ali:8050'
-
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-    'scrapy.downloadermiddleware.useragent.UserAgentMiddleware': None,
-    'AAG_splash_test.middlewares.MyUserAgentMiddleware': 400,
+    'AAH_login.middlewares.MyUserAgentMiddleware': 400,
 }
-
-SPIDER_MIDDLEWARES = {
-    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
-}
-
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
-
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
-
-ITEM_PIPELINES = {
-        'AAG_splash_test.pipelines.AagJingdongMobilePipeline': 300
-        }
-
-BOT_NAME = 'AAG_splash_test'
-
-SPIDER_MODULES = ['AAG_splash_test.spiders']
-NEWSPIDER_MODULE = 'AAG_splash_test.spiders'
-
-
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'AAG_jingdong_mobile (+http://www.yourdomain.com)'
-
-# Obey robots.txt rules
-ROBOTSTXT_OBEY = False
 
 MY_USER_AGENT = [
     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
@@ -83,6 +51,22 @@ MY_USER_AGENT = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
     ]
 
+ITEM_PIPELINES = {
+        'AAH_login.pipelines.AahLoginPipeline': 300
+        }
+
+BOT_NAME = 'AAH_login'
+
+SPIDER_MODULES = ['AAH_login.spiders']
+NEWSPIDER_MODULE = 'AAH_login.spiders'
+
+
+# Crawl responsibly by identifying yourself (and your website) on the user-agent
+#USER_AGENT = 'AAH_login (+http://www.yourdomain.com)'
+
+# Obey robots.txt rules
+ROBOTSTXT_OBEY = True
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -109,13 +93,13 @@ MY_USER_AGENT = [
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'AAG_jingdong_mobile.middlewares.AagJingdongMobileSpiderMiddleware': 543,
+#    'AAH_login.middlewares.AahLoginSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'AAG_jingdong_mobile.middlewares.AagJingdongMobileDownloaderMiddleware': 543,
+#    'AAH_login.middlewares.AahLoginDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -127,7 +111,7 @@ MY_USER_AGENT = [
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'AAG_jingdong_mobile.pipelines.AagJingdongMobilePipeline': 300,
+#    'AAH_login.pipelines.AahLoginPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
