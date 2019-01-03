@@ -1,0 +1,241 @@
+https://time.geekbang.org/column/intro/143
+
+
+https://time.geekbang.org/serv/v1/column/intro
+POST
+
+Cookie:
+SERVERID=97796d411bb56cf20a5612997f113254|1546339368|1546339243; Hm_lvt_022f847c4e3acd44d4a2481d9187f1e6=1546339249; Hm_lpvt_022f847c4e3acd44d4a2481d9187f1e6=1546339368; _ga=GA1.2.614686431.1546339358; _gid=GA1.2.1723168686.1546339358; _gat=1
+
+参数
+{"cid":"143","with_groupbuy":true}
+
+
+响应
+
+{
+	"error": [],
+	"data": {
+		"column_cover_wxlite": "https:\/\/static001.geekbang.org\/resource\/image\/96\/c6\/9697a793e1108cebf9ce89be619d25c6.jpg",
+		"column_end_time": 1553875200,
+		"is_include_preview": true,
+		"column_price_market": 9900,
+		"author_header": "https:\/\/static001.geekbang.org\/resource\/image\/76\/1f\/76031272824b0c390b1184598f6d3b1f.jpg",
+		"column_title": "程序员的数学基础课",
+		"column_type": 1,
+		"column_unit": "42讲",
+		"column_price": 9900,
+		"product_type": "c1",
+		"is_sharesale": true,
+		"is_shareget": false,
+		"column_begin_time": 1543766400,
+		"column_cover_explore": "https:\/\/static001.geekbang.org\/resource\/image\/2a\/e4\/2aad683253d694f41a6348e8cf4a7de4.png",
+		"column_sku": 100021201,
+		"groupbuy": {
+			"could_groupbuy": true,
+			"price": 7900,
+			"success_ucount": 2,
+			"join_code": "",
+			"had_join": false
+		},
+		"article_count": 12,
+		"column_utime": 1546309480,
+		"is_experience": false,
+		"column_ctime": 1543317492,
+		"update_frequency": "每周一 \/ 三 \/ 五更新",
+		"column_share_title": "黄申 · 程序员的数学基础课",
+		"had_sub": false,
+		"id": 143,
+		"nav_id": 1,
+		"column_bgcolor": "#a77d90",
+		"is_onborad": true,
+		"column_poster_wxlite": "https:\/\/static001.geekbang.org\/resource\/image\/de\/9d\/dea650e57a2c6e60e93649c31c85569d.jpg",
+		"column_sharesale_data": "{\"promo_pic_url\":\"https:\\\/\\\/static001.geekbang.org\\\/resource\\\/image\\\/fe\\\/f7\\\/fecd1f45c4a183152edb1cda3ad773f7.jpg\",\"promo_pic_color\":\"595656\",\"original_pic_url\":\"https:\\\/\\\/static001.geekbang.org\\\/resource\\\/image\\\/4a\\\/b5\\\/4afebb5778aa469862a9236be2e26ab5.jpg\",\"original_pic_color\":\"595656\",\"share_sale_price\":2400,\"share_sale_guest_price\":0}",
+		"is_preorder": false,
+		"is_include_audio": true,
+		"author_intro": "LinkedIn资深数据科学家",
+		"column_cover_inner": "https:\/\/static001.geekbang.org\/resource\/image\/32\/9c\/32865e49aea6930e65e9bb264cff7d9c.jpg",
+		"is_member_sub": 2,
+		"column_poster": "https:\/\/static001.geekbang.org\/resource\/image\/de\/09\/decc8809b7b70f3cd989f56fbcb12509.jpg",
+		"column_intro": "<p>数学好不好，直接决定一个程序员的发展潜力大小。<\/p>\n<p>往大了说，<strong>数学是一种思维模式，考验的是一个人归纳、总结和抽象的能力。把这个能力放到程序员的世界里，其实就是解决问题的能力<\/strong>。<\/p>\n<p>往小了说，不管是数据结构与算法，还是程序设计，很多底层原理和编程技巧都源自数学，比如你熟悉的分页功能，用的其实是余数的思想。所以很多大公司招人时，会优先考虑数学专业的毕业生。数学基础好，学编程也更容易上手。<\/p>\n<p>如果说编程语言是血肉，那数学的思想和知识就是灵魂。它可以帮你选择合适的数据结构和算法、提升系统效率，并且赋予机器智慧。尤其在大数据和智能化的时代，更是如此。<\/p>\n<p>因此，学数学绝不是死背那些艰深晦涩的定理和公式，洞悉技术本质，掌握知识规律，具备数学思维，拥有发现问题、分析问题、解决问题的能力，才是你的终极目标。<\/p>\n<p>那程序员究竟该如何学习数学呢？在这个专栏里，黄申从编程的视角，结合自己十多年学术经验和工业实践，总结了一套适合程序员的数学学习方法和知识体系。希望通过“知识-应用-知识”的讲解路线，为你贡献一堂<strong>实用<\/strong>、<strong>精彩<\/strong>的数学课。<\/p>\n<p>黄申，LinkedIn资深数据科学家，博士毕业于上海交通大学计算机科学与工程专业，师从俞勇教授。微软学者，IBM ExtremeBlue天才计划成员。长期专注于大数据相关的搜索、推荐、自然语言处理、广告以及用户精准化领域。<\/p>\n<p>曾在微软亚洲研究院、IBM美国研究院、eBay中国、1号店和大润发飞牛网担任要职，带队完成了若干公司级的战略项目。同时担任《计算机工程》特邀审稿专家，著有20多篇国际论文并拥有10多项国际专利。<\/p>\n<h2>专栏模块<\/h2>\n<p>专栏用42节，四大模块，精讲那些程序员真正用得上的数学知识。<\/p>\n<ul>\n<li>基础思想篇<\/li>\n<\/ul>\n<p>梳理了编程中最常用的数学概念和思想，比如余数、迭代、排列、组合，由浅入深精讲数据结构与数学是如何你中有我，我中有你。帮你彻底掌握这些最基础、最核心的数学知识，同时也能让你明白，数学对编程和算法究竟意味着什么。<\/p>\n<ul>\n<li>概率统计篇<\/li>\n<\/ul>\n<p>以概率统计中最核心的贝叶斯公式为圆心，向上讲解随机变量、概率分布这些基础概念，向下讲解朴素贝叶斯，并分析它们在生活和编程中的实际应用，在应用中反哺概念。让你真正理解概率统计的本质，跨过概念和应用之间的鸿沟。<\/p>\n<ul>\n<li>线性代数篇<\/li>\n<\/ul>\n<p>从线性代数中最核心的概念向量、矩阵、线性方程入手，逐步深入分析，这些概念是如何与计算机互帮互助，融会贯通，解决实际问题的。比如，线性代数究竟是在讲什么？怎样让计算机理解现实世界？如何过滤冗余的新闻？从概念到应用，再到本质，让你不再害怕新技术中的“旧知识”。<\/p>\n<ul>\n<li>综合实战篇<\/li>\n<\/ul>\n<p>将通过缓存系统、搜索引擎、推荐系统中的实际应用，串讲前面讲到的数学知识和概念，帮你加深对知识的理解，学会用数学思维来分析问题和解决问题，让数学思维成为你的一种基础能力。<\/p>\n<p><img src=\"https:\/\/static001.geekbang.org\/resource\/image\/ba\/f9\/bab878c6f6d1edd21b6e317fdec8ecf9.jpg\" alt=\"\" \/><\/p>\n<h2 class=\"js-audit\">订阅须知<\/h2>\n<ol class=\"js-audit\">\n<li>本专栏为订阅专栏，更新时间为2018年12月7日至2019年3月18日。订阅成功后，即可通过“极客时间”App端、小程序端、Web端永久阅读。<\/li>\n<li>本专栏更新时间为每周一、三、五，形式为图文+音频，共计42期，定价99元。<\/li>\n<li>企业批量购买请点击<a href=\"https:\/\/time.geekbang.org\/column\/article\/11958?utm_source=app&utm_medium=column&utm_campaign=businessaccount&utm_content=textlink\">极客时间VIP年卡<\/a>了解详情。<\/li>\n<li>本专栏为虚拟商品，一经订阅，概不退款。<\/li>\n<li>在专栏阅读过程中，如有任何问题，请邮件联系service@geekbang.org。<\/li>\n<\/ol>",
+		"column_sharesale": 1,
+		"column_wxlite_code": "https:\/\/static001.geekbang.org\/product\/wxa\/trans-wxa_sku\/100021201.png",
+		"author_name": "黄申",
+		"column_subtitle": "在实战中重新理解数学",
+		"lecture_url": "https:\/\/static001.geekbang.org\/resource\/image\/3d\/99\/3df4d3290d7cc68c9fedfee6170a0399.jpg",
+		"column_video_cover": "",
+		"sub_count": 13525,
+		"column_cover": "https:\/\/static001.geekbang.org\/resource\/image\/55\/d7\/559c2e5b7693a1d867a6f8141ac2ffd7.jpg",
+		"column_video_media": ""
+	},
+	"code": 0,
+	"extra": []
+}
+
+
+
+https://time.geekbang.org/serv/v1/column/articles
+POST
+
+_ga	GA1.2.614686431.1546339358
+_gat	1
+_gid	GA1.2.1723168686.1546339358
+Hm_lpvt_022f847c4e3acd44d4a2481d9187f1e6	1546339368
+Hm_lvt_022f847c4e3acd44d4a2481d9187f1e6	1546339249
+SERVERID	97796d411bb56cf20a5612997f113254|1546339368|1546339243
+
+
+{"cid":"143","size":200,"prev":0,"order":"earliest","sample":false}
+
+
+{
+	"error": [],
+	"data": {
+		"list": [{
+			"article_subtitle": "无",
+			"article_ctime": 1543824060,
+			"id": 70844,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/fc\/9d\/fcfad6325d547791f895830540dc009d.jpg",
+			"article_title": "开篇词 | 作为程序员，为什么你应该学好数学？",
+			"article_summary": "如果你只想当一个普通的程序员，那么数学对你来说，并不重要。但是如果你想做一个顶级程序员，梦想着改变世界，那么数学对你来说就很重要了。",
+			"had_viewed": false,
+			"article_could_preview": true,
+			"chapter_id": "0",
+			"score": 1543824060251
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1544112000,
+			"id": 71139,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/0a\/59\/0af88b1c1aac9e647e042112383ece59.jpg",
+			"article_title": "导读：程序员应该怎么学数学？",
+			"article_summary": "在正式的学习开始之前，我想跟你聊聊，究竟应该怎么学习数学。",
+			"had_viewed": false,
+			"article_could_preview": true,
+			"chapter_id": "0",
+			"score": 1544112000573
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1544371200,
+			"id": 71840,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/3a\/d4\/3ac1984ddd1862fc3d4ed2271a5ee4d4.jpg",
+			"article_title": "01 | 二进制：不了解计算机的源头，你学什么编程",
+			"article_summary": "我们从计算机认知的起源二进制出发，讲讲它在计算机中的“玄机”。",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1544371200646
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1544544000,
+			"id": 72163,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/8d\/2e\/8d11b158fb3b6098f93a1f98bd8f0b2e.jpg",
+			"article_title": "02 | 余数：原来取余操作本身就是个哈希函数",
+			"article_summary": "在编程中，余数有哪些应用，你之前是否有思考过呢？",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1544544000528
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1544716800,
+			"id": 72243,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/ed\/c8\/edb971106a572fe569a3ab8ce746a9c8.jpg",
+			"article_title": "03 | 迭代法：不用编程语言的自带函数，你会如何计算平方根？",
+			"article_summary": "今天我详细讲解一下“求数值的解”和“查找匹配记录”这两个迭代法的应用。",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1544716800776
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1544976000,
+			"id": 73036,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/fc\/b1\/fc32016d1f5e2d3e387bbce613fd36b1.jpg",
+			"article_title": "04 | 数学归纳法：如何用数学归纳提升代码的运行效率？",
+			"article_summary": "我们平时说的归纳，和数学归纳法有什么不一样？",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1544976000603
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1545148800,
+			"id": 73511,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/1b\/73\/1bf3c702e3b7a579a29ca3aaeb076773.jpg",
+			"article_title": "05 | 递归（上）：泛化数学归纳，如何将复杂问题简单化？",
+			"article_summary": "递归和循环其实都是迭代法的实现，而且在某些场合下，它们的实现是可以相互转化的。",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1545148800759
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1545321600,
+			"id": 73834,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/19\/22\/1913039d3c84f8b2e914749549b22e22.jpg",
+			"article_title": "06 | 递归（下）：分而治之，从归并排序到MapReduce",
+			"article_summary": "今天我来讲讲归并排序和分布式系统中的分治思想。",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1545321600383
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1545580800,
+			"id": 74296,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/7a\/5c\/7a3dd69f0fd436808cb39b9ecbcf045c.jpg",
+			"article_title": "数学专栏课外加餐（一） | 我们为什么需要反码和补码？",
+			"article_summary": "专栏已经更新了6讲，很多同学提出了很多好问题。这篇文章我将对留言里有代表性的问题做个集中的解答。",
+			"had_viewed": false,
+			"article_could_preview": true,
+			"chapter_id": "0",
+			"score": 1545580800161
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1545753600,
+			"id": 74717,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/a9\/3b\/a9cbfcade857466b893d88c151857f3b.jpg",
+			"article_title": "数学专栏课外加餐（二） | 位操作的三个应用实例",
+			"article_summary": "今天我们主要聊聊位操作的三个应用实例，以及二分查找时的两个细节，并且梳理迭代法、数学归纳法以及递归的一些知识。",
+			"had_viewed": false,
+			"article_could_preview": true,
+			"chapter_id": "0",
+			"score": 1545753600267
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1545926400,
+			"id": 75129,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/86\/ee\/8645cfb260cb4cb8ede06b1f8d452dee.jpg",
+			"article_title": "07 | 排列：如何让计算机学会“田忌赛马”？",
+			"article_summary": "排列最多的用途就是穷举法，也就是列出所有可能的情况，一个一个验证，然后看每种情况是否符合条件的解。",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1545926400157
+		}, {
+			"article_subtitle": "无",
+			"article_ctime": 1546185600,
+			"id": 75662,
+			"article_cover": "https:\/\/static001.geekbang.org\/resource\/image\/d3\/58\/d3876b8757e118dea28503e4e4279e58.jpg",
+			"article_title": "08 | 组合：如何让计算机安排世界杯的赛程？",
+			"article_summary": "组合在计算机领域有很多应用场景，比如大型比赛中赛程的自动安排、多维度的数据分析以及自然语言处理的优化。",
+			"had_viewed": false,
+			"article_could_preview": false,
+			"chapter_id": "0",
+			"score": 1546185600184
+		}],
+		"page": {
+			"more": false,
+			"count": 12
+		}
+	},
+	"code": 0,
+	"extra": []
+}
+
+
+Cookie: SERVERID=fe79ab1762e8fabea8cbf989406ba8f4|1546345753|1546345132; Hm_lvt_022f847c4e3acd44d4a2481d9187f1e6=1546339249,1546345132,1546345586,1546345691; Hm_lpvt_022f847c4e3acd44d4a2481d9187f1e6=1546345753; _ga=GA1.2.614686431.1546339358; _gid=GA1.2.1723168686.1546339358; GCID=fcaadb0-6cfbb01-7e27c30-3d0784e; _gat=1
+
+Cookie: SERVERID=fe79ab1762e8fabea8cbf989406ba8f4|1546345694|1546345132; Hm_lvt_022f847c4e3acd44d4a2481d9187f1e6=1546339249,1546345132,1546345586,1546345691; Hm_lpvt_022f847c4e3acd44d4a2481d9187f1e6=1546345694; _ga=GA1.2.614686431.1546339358; _gid=GA1.2.1723168686.1546339358; GCID=fcaadb0-6cfbb01-7e27c30-3d0784e; _gat=1; GCESS=BAwBAQQEAC8NAAcEqMg9uQUEAAAAAAYEXylKcwoEAAAAAAME2lwrXAkBAQgBAwEE4msSAAsCBAACBNpcK1w-
+
+

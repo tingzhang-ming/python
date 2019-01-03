@@ -1,0 +1,2 @@
+Created spider 'weizhongquan' using template 'basic' in module:
+  AAG_splash_test.spiders.weizhongquan
