@@ -81,7 +81,7 @@ def main():
         os.chdir(work_dir)
         git_auth()
         for pc in pull_config:
-            for p in pc['project']:
+            for p in pc['projects']:
                 clone_and_rmgit(pc['url'], pc['repo'], p)
         push(push_config['url'], push_config['repo'], push_config['project'])
     except Exception as e:
