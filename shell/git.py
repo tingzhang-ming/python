@@ -18,10 +18,33 @@ git_auth_file = os.path.join(os.path.expanduser('~'), '.git-credentials')
 pull_config = [
     {
         "url": "https://github.com",
-        "repo": "mhcvs2",
+        "repo": "cloudpi",
         "projects": [
-            "HeartyHome",
-            "prometheusExporter"
+            "clouddriver-mini",
+            "dbcli",
+            'dbcm-base-managers',
+            ' dbcm-mgmtapi',
+            ' dbcm-monitor',
+            ' dbcm-operator-module',
+            ' dbcm-opsapi ',
+            ' dbcm-swarmkit',
+            ' drbd-docker-plugin'
+        ]
+    },
+    {
+        'url': "http://gitlab.gcloud.srcb.com",
+        'repo': 'mahongchao',
+        'projects': [
+            'confd-dns',
+            ' spinnaker-deploy',
+            ' spinnaker-json '
+        ]
+    },
+    {
+        'url': "http://gitlab.gcloud.srcb.com",
+        'repo': 'maning',
+        'projects': [
+            ' infra_building_backend'
         ]
     }
 ]
@@ -93,9 +116,9 @@ def main():
         git_auth()
         for pc in pull_config:
             for p in pc['projects']:
-                clone_and_rmgit(pc['url'], pc['repo'], p)
+                clone_and_rmgit(pc['url'], pc['repo'], p.strip())
         run_shell('git init')
-        push(push_config['url'], push_config['repo'], push_config['project'])
+        push(push_config['url'], push_config['repo'], push_config['project'].strip())
     except Exception as e:
         print "error: "
         print str(e)
