@@ -2,13 +2,12 @@
 import os
 import tempfile
 import subprocess
-from urlparse import urljoin
 
 github_user = "mhcvs2"
 github_password = ""
 
 gitee_user = "mhcvs"
-gitee_password = ""
+gitee_password = "qq77aa88"
 
 gitlab_user = "hongchao.ma@samsung.com"
 gitlab_password = "qq77aa88"
@@ -20,7 +19,7 @@ pull_config = [
         "url": "https://github.com",
         "repo": "mhcvs2",
         "projects": [
-            "cpp",
+            "HeartyHome",
             "prometheusExporter"
         ]
     }
@@ -38,6 +37,7 @@ def get_project_url(url, repo, project):
 
 
 def run_shell(cmd):
+    print cmd
     subprocess.check_output(args=cmd, shell=True)
 
 
@@ -58,11 +58,11 @@ def git_auth():
     with open(git_auth_file, 'w') as f:
         lines = []
         if gitee_user:
-            lines.append('https://{}:{}@gitee.com'.format(gitee_user, gitee_password))
+            lines.append('https://{}:{}@gitee.com\n'.format(gitee_user, gitee_password))
         if github_user:
-            lines.append('https://{}:{}@github.com'.format(github_user, github_password))
+            lines.append('https://{}:{}@github.com\n'.format(github_user, github_password))
         if gitlab_user:
-            lines.append('http://{}:{}@gitlab.gcloud.srcb.com'.format(gitlab_user, gitlab_password))
+            lines.append('http://{}:{}@gitlab.gcloud.srcb.com\n'.format(gitlab_user, gitlab_password))
         f.writelines(lines)
 
 
@@ -92,4 +92,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print get_project_url(push_config['url'], push_config['repo'], push_config['project'])
+    main()
