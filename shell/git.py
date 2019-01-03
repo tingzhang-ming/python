@@ -49,6 +49,8 @@ def clone_and_rmgit(url, repo, project):
 
 def push(url, repo, project):
     run_shell("git remote add origin {}".format(get_project_url(url, repo, project)))
+    run_shell("git config --global user.email you@example.com")
+    run_shell("git config --global user.name Your Name")
     run_shell("git add --all")
     run_shell('git commit -m"first"')
     run_shell('git push origin master')
