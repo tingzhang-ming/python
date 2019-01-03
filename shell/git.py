@@ -76,7 +76,8 @@ def clear(work_dir):
 def main():
     work_dir = None
     try:
-        work_dir = tempfile.gettempdir()
+        work_dir = tempfile.mkdtemp()
+        print "work dir: ", work_dir
         os.chdir(work_dir)
         git_auth()
         for pc in pull_config:
