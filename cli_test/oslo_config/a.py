@@ -15,6 +15,7 @@ common_opts = [
                 help='Roles to add to an admin user.'),
     cfg.StrOpt('some', default="$api_paste_config/haha",
                help='File name for the paste.deploy config for trove-api.'),
+    cfg.DictOpt('db_port', default={"mysql": 3306, "pg": 5432})
 ]
 
 database_opts = [
@@ -77,6 +78,7 @@ def t1():
     print CONF.mysql.icmp
     print CONF.mysql.tcp_ports
     print CONF.some
+    print CONF.db_port
 
 # python a.py --config-file D:\github\python\cli_test\oslo_config\configs\a.conf
 # python a.py --config-dir D:\github\python\cli_test\oslo_config\configs
@@ -120,6 +122,8 @@ def t3():
 
     print CONF.mysql.icmp
     print CONF.mysql.tcp_ports
+    print CONF.db_port
+    print CONF.db_port.get("pg")
 
 
 def t4():
@@ -141,4 +145,4 @@ def t4():
 
 
 if __name__ == '__main__':
-    t1()
+    t3()
