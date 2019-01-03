@@ -68,8 +68,8 @@ def git_auth():
 
 
 def clear(work_dir):
-    # if os.path.exists(git_auth_file):
-    #     os.remove(git_auth_file)
+    if os.path.exists(git_auth_file):
+        os.remove(git_auth_file)
     if work_dir and os.path.isdir(work_dir):
         shutil.rmtree(work_dir)
 
@@ -84,6 +84,7 @@ def main():
         for pc in pull_config:
             for p in pc['projects']:
                 clone_and_rmgit(pc['url'], pc['repo'], p)
+        run_shell('git init')
         push(push_config['url'], push_config['repo'], push_config['project'])
     except Exception as e:
         print "error: "
