@@ -34,7 +34,7 @@ push_config = {
 
 
 def get_project_url(url, repo, project):
-    return urljoin(urljoin(url, repo), '{}.git'.format(project))
+    return '{}/{}/{}.git'.format(url, repo, project)
 
 
 def run_shell(cmd):
@@ -67,8 +67,8 @@ def git_auth():
 
 
 def clear(work_dir):
-    if os.path.exists(git_auth_file):
-        os.remove(git_auth_file)
+    # if os.path.exists(git_auth_file):
+    #     os.remove(git_auth_file)
     if work_dir and os.path.isdir(work_dir):
         os.rmdir(work_dir)
 
@@ -92,4 +92,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    print get_project_url(push_config['url'], push_config['repo'], push_config['project'])
