@@ -5,10 +5,10 @@ import subprocess
 from urlparse import urljoin
 
 github_user = "mhcvs2"
-github_password = "7507525e4e4ba272e32cc37d92f7aea9095ac72d"
+github_password = ""
 
 gitee_user = "mhcvs"
-gitee_password = "qq77aa88"
+gitee_password = ""
 
 gitlab_user = "hongchao.ma@samsung.com"
 gitlab_password = "qq77aa88"
@@ -56,11 +56,13 @@ def push(url, repo, project):
 def git_auth():
     run_shell('git config --global credential.helper store')
     with open(git_auth_file, 'w') as f:
-        lines = [
-            'https://{}:{}@gitee.com'.format(gitee_user, gitee_password),
-            'https://{}:{}@github.com'.format(github_user, github_password),
-            'http://{}:{}@gitlab.gcloud.srcb.com'.format(gitlab_user, gitlab_password),
-        ]
+        lines = []
+        if gitee_user:
+            lines.append('https://{}:{}@gitee.com'.format(gitee_user, gitee_password))
+        if github_user:
+            lines.append('https://{}:{}@github.com'.format(github_user, github_password))
+        if gitlab_user:
+            lines.append('http://{}:{}@gitlab.gcloud.srcb.com'.format(gitlab_user, gitlab_password))
         f.writelines(lines)
 
 
