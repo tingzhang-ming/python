@@ -76,8 +76,15 @@ def clear(work_dir):
         shutil.rmtree(work_dir)
 
 
+def config_proxy():
+    https_proxy = os.environ['https_proxy'] or os.environ['HTTPS_PROXY']
+    if https_proxy:
+        run_shell('git config --global https.proxy {}'.format(https_proxy))
+
+
 def main():
     work_dir = None
+    config_proxy()
     try:
         work_dir = tempfile.mkdtemp()
         print "work dir: ", work_dir
