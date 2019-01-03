@@ -44,7 +44,7 @@ def run_shell(cmd):
 
 def clone_and_rmgit(url, repo, project):
     run_shell("git clone {}".format(get_project_url(url, repo, project)))
-    os.rmdir(os.path.join(project, '.git'))
+    shutil.rmtree(os.path.join(project, '.git'))
 
 
 def push(url, repo, project):
@@ -75,29 +75,21 @@ def clear(work_dir):
 
 
 def main():
-    work_dir = tempfile.mkdtemp()
-    print "work dir: ", work_dir
-    os.chdir(work_dir)
-    git_auth()
-    for pc in pull_config:
-        for p in pc['projects']:
-            clone_and_rmgit(pc['url'], pc['repo'], p)
-    push(push_config['url'], push_config['repo'], push_config['project'])
-    # work_dir = None
-    # try:
-    #     work_dir = tempfile.mkdtemp()
-    #     print "work dir: ", work_dir
-    #     os.chdir(work_dir)
-    #     git_auth()
-    #     for pc in pull_config:
-    #         for p in pc['projects']:
-    #             clone_and_rmgit(pc['url'], pc['repo'], p)
-    #     push(push_config['url'], push_config['repo'], push_config['project'])
-    # except Exception as e:
-    #     print "error: "
-    #     print e.message
-    # finally:
-    #     clear(work_dir)
+    work_dir = None
+    try:
+        work_dir = tempfile.mkdtemp()
+        print "work dir: ", work_dir
+        os.chdir(work_dir)
+        git_auth()
+        for pc in pull_config:
+            for p in pc['projects']:
+                clone_and_rmgit(pc['url'], pc['repo'], p)
+        push(push_config['url'], push_config['repo'], push_config['project'])
+    except Exception as e:
+        print "error: "
+        print str(e)
+    finally:
+        clear(work_dir)
 
 
 if __name__ == '__main__':
