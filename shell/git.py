@@ -48,7 +48,7 @@ def clone_and_rmgit(url, repo, project):
 
 
 def push(url, repo, project):
-    run_shell("git repo add origin {}".format(get_project_url(url, repo, project)))
+    run_shell("git remote add origin {}".format(get_project_url(url, repo, project)))
     run_shell("git add --all")
     run_shell('git commit -m"first"')
     run_shell('git push origin master')
